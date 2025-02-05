@@ -8,7 +8,7 @@ class homepages extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text("ClubNest App"),),
       body: Center(
-        child: Text("Welcome Our App!"),
+        child: Text("Welcome to ClubNest"),
       ),
     );
   }
