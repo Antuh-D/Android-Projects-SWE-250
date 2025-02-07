@@ -83,4 +83,5 @@ class DefaultFirebaseOptions {
     authDomain: 'clubnest-5c540.firebaseapp.com',
     storageBucket: 'clubnest-5c540.firebasestorage.app',
   );
+
 }
