@@ -1,0 +1,27 @@
+[
+  {
+    "title": "Find products easily",
+    "description": "You just need to take a photo or upload and we will find similar products for you.",
+    "imagePath": "assets/png/fitness_club.jpg"
+  },
+  {
+    "title": "View product 360 degrees",
+    "description": "You can see the product with all angles, true and convenient",
+    "imagePath": "assets/png/blood.jpg"
+  },
+  {
+    "title": "Payment is easy",
+    "description": "You can pay with various secure and easy payment methods.",
+    "imagePath": "assets/png/KIN.jpg"
+  },
+  {
+    "title": "Payment is easy",
+    "description": "You can pay with various secure and easy payment methods.",
+    "imagePath": "assets/png/RIM_Sust.png"
+  },
+  {
+    "title": "Payment is easy",
+    "description": "You can pay with various secure and easy payment methods.",
+    "imagePath": "assets/png/sports_sust.jpg"
+  }
+]
