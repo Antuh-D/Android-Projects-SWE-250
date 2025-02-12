@@ -1,8 +1,12 @@
 import 'dart:convert';
 import 'package:campusclubs/components/NavigateSlide.dart';
+import 'package:campusclubs/config/AppRoutes.dart';
 import 'package:campusclubs/config/AppString.dart';
+import 'package:campusclubs/styles/AppTexts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+
+import '../styles/AppColors.dart';
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -31,7 +35,7 @@ class HomePageState extends State<WelcomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pageContents.isEmpty
-          ? Center(child: CircularProgressIndicator())  // Show loader until data loads
+          ? Center(child: CircularProgressIndicator())
           : Stack(
         children: [
           Column(
@@ -83,7 +87,7 @@ class HomePageState extends State<WelcomePage> {
                     width: 8,
                     height: 8,
                     decoration: BoxDecoration(
-                      color: currentPage == index ? Colors.black54 : Colors.grey,
+                      color: currentPage == index ? AppColors.rediobutton1 : AppColors.rediobutton2,
                       borderRadius: BorderRadius.circular(4),
                     ),
                   );
@@ -91,10 +95,12 @@ class HomePageState extends State<WelcomePage> {
               ),
               SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {},
-                child: Text(AppString.join, style: TextStyle(color: Colors.white)),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(AppRoutes.login);
+                },
+                child: Text(AppString.join, style: AppTexts.button),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: AppColors.buttonColor,
                   padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
