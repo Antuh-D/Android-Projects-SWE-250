@@ -1,3 +1,4 @@
+import 'package:campusclubs/config/AppRoutes.dart';
 import 'package:flutter/material.dart';
 import 'pages/WelcomePage.dart';
 
@@ -14,10 +15,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
         ),
-        initialRoute:'/',
-        routes:{
-          '/': (context) => HomePage(),
-        }
+        initialRoute: AppRoutes.welcomepage,
+        routes: AppRoutes.pages,
     );
   }
 }

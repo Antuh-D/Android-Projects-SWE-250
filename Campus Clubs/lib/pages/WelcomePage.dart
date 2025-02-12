@@ -1,13 +1,15 @@
 import 'dart:convert';
+import 'package:campusclubs/components/NavigateSlide.dart';
+import 'package:campusclubs/config/AppString.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
-class HomePage extends StatefulWidget {
+class WelcomePage extends StatefulWidget {
   @override
   HomePageState createState() => HomePageState();
 }
 
-class HomePageState extends State<HomePage> {
+class HomePageState extends State<WelcomePage> {
   final PageController _pageController = PageController();
   int currentPage = 0;
   List<Map<String, dynamic>> _pageContents = [];
@@ -78,7 +80,7 @@ class HomePageState extends State<HomePage> {
                   return AnimatedContainer(
                     duration: Duration(milliseconds: 300),
                     margin: EdgeInsets.symmetric(horizontal: 5),
-                    width: currentPage == index ? 12 : 8,
+                    width: 8,
                     height: 8,
                     decoration: BoxDecoration(
                       color: currentPage == index ? Colors.black54 : Colors.grey,
@@ -90,7 +92,7 @@ class HomePageState extends State<HomePage> {
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {},
-                child: Text('Get Started', style: TextStyle(color: Colors.white)),
+                child: Text(AppString.join, style: TextStyle(color: Colors.white)),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
                   padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
@@ -102,43 +104,35 @@ class HomePageState extends State<HomePage> {
               SizedBox(height: 50),
             ],
           ),
-          Positioned(
-            right: 10,
-            top: MediaQuery.of(context).size.height * 0.4,
-            child: IconButton(
-              icon: Icon(Icons.arrow_forward_ios_outlined, size: 30, color: Colors.black),
-              onPressed: () {
-                if (currentPage < _pageContents.length - 1) {
-                  setState(() {
-                    currentPage++;
-                  });
-                  _pageController.animateToPage(
-                    currentPage,
-                    duration: Duration(milliseconds: 500),
-                    curve: Curves.easeInOut,
-                  );
-                }
-              },
-            ),
+          NavigateSlide(
+            isRight: true,
+            onPressed: () {
+              if (currentPage < _pageContents.length - 1) {
+                setState(() {
+                  currentPage++;
+                });
+                _pageController.animateToPage(
+                  currentPage,
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
+                );
+              }
+            },
           ),
-          Positioned(
-            left: 10,
-            top: MediaQuery.of(context).size.height * 0.4,
-            child: IconButton(
-              icon: Icon(Icons.arrow_back_ios_new_outlined, size: 30, color: Colors.black),
-              onPressed: () {
-                if (currentPage > 0) {
-                  setState(() {
-                    currentPage--;
-                  });
-                  _pageController.animateToPage(
-                    currentPage,
-                    duration: Duration(milliseconds: 500),
-                    curve: Curves.easeInOut,
-                  );
-                }
-              },
-            ),
+          NavigateSlide(
+            isRight: false,
+            onPressed: () {
+              if (currentPage > 0) {
+                setState(() {
+                  currentPage--;
+                });
+                _pageController.animateToPage(
+                  currentPage,
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
+                );
+              }
+            },
           ),
         ],
       ),
