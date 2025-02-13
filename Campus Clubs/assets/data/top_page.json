@@ -1,27 +1,27 @@
 [
   {
-    "title": "Find products easily",
-    "description": "You just need to take a photo or upload and we will find similar products for you.",
+    "title": "Stay Fit, Stay Strong",
+    "description": "Join SUST Fitness Club to achieve your fitness goals with expert guidance and a supportive community.",
     "imagePath": "assets/png/fitness_club.jpg"
   },
   {
-    "title": "View product 360 degrees",
-    "description": "You can see the product with all angles, true and convenient",
+    "title": "Be a Hero, Donate Blood",
+    "description": "Sonchalon is dedicated to saving lives through blood donation drives and awareness campaigns.",
     "imagePath": "assets/png/blood.jpg"
   },
   {
-    "title": "Payment is easy",
-    "description": "You can pay with various secure and easy payment methods.",
+    "title": "Empowering Communities, Changing Lives",
+    "description": "KIN is a voluntary club committed to social welfare, education, and humanitarian efforts.",
     "imagePath": "assets/png/KIN.jpg"
   },
   {
-    "title": "Payment is easy",
-    "description": "You can pay with various secure and easy payment methods.",
-    "imagePath": "assets/png/RIM_Sust.png"
+    "title": "Feel the Music, Live the Rhythm",
+    "description": "RIM brings together passionate musicians and music lovers to create and celebrate music.",
+    "imagePath": "assets/png/RIM.png"
   },
   {
-    "title": "Payment is easy",
-    "description": "You can pay with various secure and easy payment methods.",
+    "title": "Unleash the Champion in You",
+    "description": "Sports SUST fosters a competitive spirit by promoting various sports and athletic activities on campus.",
     "imagePath": "assets/png/sports_sust.jpg"
   }
 ]

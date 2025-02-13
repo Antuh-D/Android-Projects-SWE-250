@@ -1,15 +1,20 @@
-import 'package:campusclubs/config/AppRoutes.dart';
+import 'package:flutter/material.dart';
 import 'package:campusclubs/config/AppString.dart';
 import 'package:campusclubs/config/AppURL.dart';
 import 'package:campusclubs/styles/AppColors.dart';
 import 'package:campusclubs/styles/AppTexts.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../components/AppTextField.dart';
+import '../config/AppRoutes.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
+  @override
+  State<SignUpPage> createState() => _signUpPageState();
+}
+
+class _signUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,13 +59,21 @@ class LoginPage extends StatelessWidget {
                   padding: const EdgeInsets.all(20),
                   child: Column(
                     children: [
-                      Text(AppString.welcomeText1, style: AppTexts.AppHeading),
+                      Text(AppString.signup, style: AppTexts.AppHeading),
+                      SizedBox(height: 10,),
+                      SvgPicture.asset(AppURL.user,height: 40,),
+                      SizedBox(height:5),
+                      Text(AppString.undersingup, style: AppTexts.normal),
+                      SizedBox(height: 20),
+                      AppTextField(hint: 'Username'),
                       SizedBox(height: 10),
-                      Text(AppString.welcomeText2, style: AppTexts.grayText),
+                      AppTextField(hint: 'Email'),
                       SizedBox(height: 10),
                       AppTextField(hint: 'Registation No'),
                       SizedBox(height: 10),
                       AppTextField(hint: 'Password'),
+                      SizedBox(height: 10),
+                      AppTextField(hint: 'Confirm Password'),
                       SizedBox(height: 20),
                       SizedBox(
                         width: 250,
@@ -72,7 +85,7 @@ class LoginPage extends StatelessWidget {
                             elevation: 5,
                           ),
                           child: const Text(
-                            "LOGIN",
+                            "SIGN UP",
                             style: AppTexts.button2,
                           ),
                         ),
@@ -82,19 +95,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {
-                    print("Forget password button pressed");
-                  },
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.grey,
-                  ),
-                  child: const Text("Forget Password ?",style:TextStyle(color: Colors.blueAccent),),
-                ),
-              ),
-              const Text("Or sign in with", style:AppTexts.normal),
+              const Text("Or", style:AppTexts.normal),
               SizedBox(height: 5,),
               Padding(
                 padding: const EdgeInsets.all(7),
@@ -114,11 +115,11 @@ class LoginPage extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min, // Ensures it wraps the content size
                     children: [
                       Image.asset(
-                        AppURL.fblogo,
-                        height: 35, // Adjust height as needed
+                        AppURL.email_logo,
+                        height: 25, // Adjust height as needed
                       ),
                       SizedBox(width: 10), // Add spacing between image and text
-                      const Text("Login with Facebook",style: AppTexts.normalbold,)
+                      const Text("Continue with Email",style: AppTexts.normalbold,)
                     ],
                   ),
                 ),
@@ -145,7 +146,7 @@ class LoginPage extends StatelessWidget {
                         height: 35, // Adjust height as needed
                       ),
                       SizedBox(width: 10), // Add spacing between image and text
-                      const Text("Sign with Google",style: AppTexts.normalbold)
+                      const Text("Continue with Google",style: AppTexts.normalbold)
                     ],
                   ),
                 ),
@@ -153,16 +154,16 @@ class LoginPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Don't have an account?", style: AppTexts.normal),
+                  const Text("Already have an account?", style: AppTexts.normal),
                   TextButton(
                     onPressed: () {
-                      Navigator.of(context).pushNamed(AppRoutes.signup);
+                      Navigator.of(context).pushNamed(AppRoutes.login);
                     },
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.white70,
                     ),
                     child: const Text(
-                      "Sign up",
+                      "Login",
                       style: AppTexts.normalbule,
 
                     ),

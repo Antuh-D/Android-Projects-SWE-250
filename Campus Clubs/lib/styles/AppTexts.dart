@@ -26,5 +26,15 @@ class AppTexts{
   fontSize: 14,
   color: Colors.black
   );
+ static const normalbold = TextStyle(
+      fontSize: 14,
+      color: Colors.black,
+      fontWeight:  FontWeight.bold
+  );
+
+  static const normalbule = TextStyle(
+      fontSize: 14,
+      color: Colors.blue
+  );
 
 }
