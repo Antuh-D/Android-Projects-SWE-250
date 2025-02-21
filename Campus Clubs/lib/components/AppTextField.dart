@@ -3,13 +3,24 @@ import 'package:flutter/material.dart';
 
 class AppTextField extends StatelessWidget{
   final String hint;
+  final TextEditingController controller;
+  final bool obscureText;
+  final TextInputType keyboardType;
 
-  const AppTextField({super.key, required this.hint});
-
+  const AppTextField({
+    Key? key,
+    required this.hint,
+    required this.controller,
+    this.obscureText = false,
+    this.keyboardType = TextInputType.text,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
+      obscureText: obscureText,
+      keyboardType: keyboardType,
       style: AppTexts.normal,
       decoration: InputDecoration(
         hintText: hint,

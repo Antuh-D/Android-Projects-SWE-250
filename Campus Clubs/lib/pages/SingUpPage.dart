@@ -1,11 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:campusclubs/config/AppString.dart';
 import 'package:campusclubs/config/AppURL.dart';
 import 'package:campusclubs/styles/AppColors.dart';
 import 'package:campusclubs/styles/AppTexts.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../components/AppTextField.dart';
 import '../config/AppRoutes.dart';
+import 'package:http/http.dart' as http;
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -15,6 +19,55 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _signUpPageState extends State<SignUpPage> {
+  final TextEditingController username = TextEditingController();
+  final TextEditingController  email = TextEditingController();
+  final TextEditingController  registration = TextEditingController();
+  final TextEditingController  password = TextEditingController();
+  final TextEditingController confirmPassword = TextEditingController();
+
+  bool isLoading = false;
+
+  Future<void> signUp() async{
+    if (password.text != confirmPassword.text) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Passwords do not match')),
+      );
+      return;
+    }
+
+    setState(() {
+      isLoading = true;
+    });
+
+    final response = await http.post(
+      Uri.parse("${dotenv.env['API_URL']}/api/signup"), // Change to your backend API
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+      body: json.encode({
+        'username': username.text,
+        'email': email.text,
+        'registration': registration.text,
+        'password': password.text,
+      }),
+    );
+
+    setState(() {
+      isLoading = false;
+    });
+
+    print("Response Code: ${response.statusCode}");
+    print("Response Body: ${response.body}");
+
+    if (response.statusCode == 201) {
+      Navigator.of(context).pushNamed(AppRoutes.menus);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Failed to sign up')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,26 +118,30 @@ class _signUpPageState extends State<SignUpPage> {
                       SizedBox(height:5),
                       Text(AppString.undersingup, style: AppTexts.normal),
                       SizedBox(height: 20),
-                      AppTextField(hint: 'Username'),
+                      AppTextField(hint: 'Username', controller: username,),
                       SizedBox(height: 10),
-                      AppTextField(hint: 'Email'),
+                      AppTextField(hint: 'Email', controller: email,),
                       SizedBox(height: 10),
-                      AppTextField(hint: 'Registation No'),
+                      AppTextField(hint: 'Registation No', controller: registration),
                       SizedBox(height: 10),
-                      AppTextField(hint: 'Password'),
+                      AppTextField(hint: 'Password', controller: password,obscureText: true,),
                       SizedBox(height: 10),
-                      AppTextField(hint: 'Confirm Password'),
+                      AppTextField(hint: 'Confirm Password', controller: confirmPassword, obscureText: true,),
                       SizedBox(height: 20),
                       SizedBox(
                         width: 250,
                         height: 40,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                             signUp();
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.buttonColor,
                             elevation: 5,
                           ),
-                          child: const Text(
+                          child:isLoading
+                              ? CircularProgressIndicator(color: Colors.white)
+                              : const Text(
                             "SIGN UP",
                             style: AppTexts.button2,
                           ),
