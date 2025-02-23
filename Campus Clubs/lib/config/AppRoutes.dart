@@ -1,5 +1,6 @@
 
 import 'package:campusclubs/pages/MenuPage.dart';
+import 'package:campusclubs/pages/ProfilePage.dart';
 import 'package:campusclubs/pages/SearchPage.dart';
 
 import '../pages/HomePage.dart';
@@ -15,6 +16,7 @@ class AppRoutes{
     home:(context) => HomePage(),
     menus: (context) => MenuPage(),
     search: (context) => SearchPage(),
+    profile: (context) => ProfilePage(),
   };
   static const welcomepage = '/';
   static const login = '/login';
@@ -22,4 +24,5 @@ class AppRoutes{
   static const home = '/home';
   static const menus = '/menus';
   static const search = '/search';
+  static const profile = '/profile';
 }

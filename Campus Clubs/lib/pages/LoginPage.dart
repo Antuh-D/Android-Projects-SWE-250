@@ -56,15 +56,15 @@ class _LoginPageState extends State<LoginPage> {
       final responseData = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Login Successful!")),
-        );
         Provider.of<UserProvider>(context, listen: false).fetchUserByEmail(emailValue);
         Navigator.pushNamed(context, AppRoutes.menus);  // Navigate to Home page
       } else {
         setState(() {
           errorMessage = responseData['message'] ?? "Login failed";  // Display backend error message
         });
+      ScaffoldMessenger.of(context).showSnackBar(
+         SnackBar(content: Text(errorMessage)),
+     );
       }
     } catch (e) {
       setState(() {

@@ -1,28 +1,32 @@
+import 'dart:io';
+
 import 'package:campusclubs/components/MyAppBar.dart';
-import 'package:campusclubs/config/AppRoutes.dart';
 import 'package:campusclubs/config/AppString.dart';
-import 'package:campusclubs/config/AppURL.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+
 import '../config/UserProvider.dart';
-import '../components/MyAppBar.dart';
 
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
 
-class HomePage extends StatelessWidget {
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final user = userProvider.user;
 
+
     return Scaffold(
       appBar: MyAppBar(
-        Headding: AppString.appname,
-        onProfileClick:(){
-          Navigator.of(context).pushNamed(AppRoutes.profile);
-        },
-        onSettingsClick:(){
-
-        },
+        Headding: AppString.profile,
+        backpage: true,
       ),
       body: Center(
         child: user == null
@@ -35,6 +39,6 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ) ;
   }
 }
