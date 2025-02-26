@@ -14,8 +14,11 @@ void main() async {
         ChangeNotifierProvider(create: (_) => UserProvider()),
       ],
       child: MyApp(),
+
     ),
+
   );
+
 }
 
 class MyApp extends StatelessWidget {
@@ -26,7 +29,9 @@ class MyApp extends StatelessWidget {
     return  MaterialApp(
         theme: ThemeData(
           scaffoldBackgroundColor:AppColors.appBackground,
+
         ),
+      debugShowCheckedModeBanner: false,
         initialRoute: AppRoutes.welcomepage,
         routes: AppRoutes.pages,
     );
