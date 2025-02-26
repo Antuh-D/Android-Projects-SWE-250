@@ -7,4 +7,5 @@ class AppString{
   static const String undersingup = "Create your account";
   static const String profile = 'Your  Profile';
   static const String notification = 'Notifications';
+  static const String myclubs = "Joined Clubs";
 }

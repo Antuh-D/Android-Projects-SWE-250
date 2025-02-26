@@ -3,12 +3,13 @@ import 'package:campusclubs/pages/SearchPage.dart';
 import 'package:campusclubs/styles/AppColors.dart';
 import 'package:flutter/material.dart';
 
+import 'MyClubPage.dart';
 import 'NotificationPage.dart';
 
 enum Menus{
   home,
   search,
-  favorite,
+  myclubs,
   notification,
 }
 
@@ -25,7 +26,7 @@ class _MenuPageState extends State<MenuPage> {
   final Map<Menus, Widget> currentPage ={
     Menus.home : HomePage(),
     Menus.search: SearchPage(),
-    Menus.favorite: Text("This is Favorite page"),
+    Menus.myclubs: MyClubPage(),
     Menus.notification:NotificationPage() ,
   };
 
@@ -114,14 +115,14 @@ class MyBottomNavigation extends StatelessWidget{
               Container(
                 height: 40,
                 decoration: BoxDecoration(
-                  color: currentIndex==Menus.favorite? AppColors.appBackground : AppColors.navigator,
+                  color: currentIndex==Menus.myclubs? AppColors.appBackground : AppColors.navigator,
                   borderRadius: BorderRadius.all(Radius.circular(30)),
                 ),
                 child: IconButton(
-                    onPressed: ()=> onTap(Menus.favorite),
+                    onPressed: ()=> onTap(Menus.myclubs),
                     icon: Icon(
                         Icons.newspaper_rounded,
-                        color: currentIndex==Menus.favorite? Colors.amber[800] : Colors.grey ,
+                        color: currentIndex==Menus.myclubs? Colors.amber[800] : Colors.grey ,
                     )
                 ),
               ),
