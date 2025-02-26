@@ -2,17 +2,17 @@
   {
     "title": "Stay Fit, Stay Strong",
     "description": "Join SUST Fitness Club to achieve your fitness goals with expert guidance and a supportive community.",
-    "imagePath": "assets/png/fitness_club.jpg"
+    "imagePath": "assets/png/fitT.png"
   },
   {
     "title": "Be a Hero, Donate Blood",
     "description": "Sonchalon is dedicated to saving lives through blood donation drives and awareness campaigns.",
-    "imagePath": "assets/png/blood.jpg"
+    "imagePath": "assets/png/bloodT.png"
   },
   {
     "title": "Empowering Communities, Changing Lives",
     "description": "KIN is a voluntary club committed to social welfare, education, and humanitarian efforts.",
-    "imagePath": "assets/png/KIN.jpg"
+    "imagePath": "assets/png/kinT.png"
   },
   {
     "title": "Feel the Music, Live the Rhythm",
@@ -22,6 +22,6 @@
   {
     "title": "Unleash the Champion in You",
     "description": "Sports SUST fosters a competitive spirit by promoting various sports and athletic activities on campus.",
-    "imagePath": "assets/png/sports_sust.jpg"
+    "imagePath": "assets/png/sportT.png"
   }
 ]
