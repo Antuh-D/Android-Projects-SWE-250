@@ -22,7 +22,7 @@ class NavigateSlide extends StatelessWidget {
               ? Icons.arrow_forward_ios_outlined
               : Icons.arrow_back_ios_new_outlined,
           size: 30,
-          color: Colors.black,
+          color:Colors.grey,
         ),
         onPressed: onPressed,
       ),

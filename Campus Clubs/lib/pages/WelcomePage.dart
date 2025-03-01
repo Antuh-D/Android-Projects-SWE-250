@@ -110,7 +110,8 @@ class HomePageState extends State<WelcomePage> {
               SizedBox(height: 50),
             ],
           ),
-          NavigateSlide(
+          if (currentPage < _pageContents.length - 1)
+            NavigateSlide(
             isRight: true,
             onPressed: () {
               if (currentPage < _pageContents.length - 1) {
@@ -125,6 +126,7 @@ class HomePageState extends State<WelcomePage> {
               }
             },
           ),
+          if (currentPage > 0)
           NavigateSlide(
             isRight: false,
             onPressed: () {

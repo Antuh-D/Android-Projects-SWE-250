@@ -5,6 +5,11 @@
     "imagePath": "assets/png/fitT.png"
   },
   {
+    "title": "Explore. Analyze. Innovate.",
+    "description": "Unlocking insights, shaping the future—SUST Data Science Club empowers minds with data-driven innovation.",
+    "imagePath": "assets/png/dataT.png"
+  },
+  {
     "title": "Be a Hero, Donate Blood",
     "description": "Sonchalon is dedicated to saving lives through blood donation drives and awareness campaigns.",
     "imagePath": "assets/png/bloodT.png"
@@ -24,4 +29,5 @@
     "description": "Sports SUST fosters a competitive spirit by promoting various sports and athletic activities on campus.",
     "imagePath": "assets/png/sportT.png"
   }
+
 ]
