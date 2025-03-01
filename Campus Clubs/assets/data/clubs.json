@@ -1,0 +1,86 @@
+{
+  "clubs": [
+    {
+      "name": "Tech Enthusiasts",
+      "subtitle": "Exploring the latest in technology",
+      "category": "Technology",
+      "members": 120,
+      "image": "assets/png/dataT.png",
+      "followers": 300
+    },
+    {
+      "name": "Photography Club",
+      "subtitle": "Capturing moments beautifully",
+      "category": "Art & Media",
+      "members": 85,
+      "image": "assets/png/dataT.png",
+      "followers": 220
+    },
+    {
+      "name": "Book Lovers",
+      "subtitle": "For those who love to read",
+      "category": "Literature",
+      "members": 150,
+      "image": "assets/png/dataT.png",
+      "followers": 400
+    },
+    {
+      "name": "Music Band",
+      "subtitle": "Bringing music to life",
+      "category": "Music",
+      "members": 60,
+      "image": "assets/png/dataT.png",
+      "followers": 180
+    },
+    {
+      "name": "Gaming Community",
+      "subtitle": "Gamers unite for fun and competition",
+      "category": "Gaming",
+      "members": 200,
+      "image": "assets/png/dataT.png",
+      "followers": 500
+    }
+  ],
+  "suggested_clubs": [
+    {
+      "name": "Machine Learning",
+      "subtitle": "Diving deep into artificial intelligence",
+      "category": "Technology",
+      "members": 180,
+      "image": "assets/png/dataT.png",
+      "followers": 450
+    },
+    {
+      "name": "Robotics Club",
+      "subtitle": "Building the future with robots",
+      "category": "Engineering",
+      "members": 95,
+      "image": "assets/png/dataT.png",
+      "followers": 300
+    },
+    {
+      "name": "Entrepreneurship Hub",
+      "subtitle": "Creating and innovating businesses",
+      "category": "Business",
+      "members": 130,
+      "image": "assets/png/dataT.png",
+      "followers": 350
+    },
+    {
+      "name": "Fitness & Wellness",
+      "subtitle": "Stay fit, stay healthy",
+      "category": "Health & Fitness",
+      "members": 75,
+      "image": "assets/png/dataT.png",
+      "followers": 210
+    },
+    {
+      "name": "Chess Club",
+      "subtitle": "Strategic minds think alike",
+      "category": "Strategy",
+      "members": 110,
+      "image": "assets/png/dataT.png",
+      "followers": 280
+    }
+  ]
+}
