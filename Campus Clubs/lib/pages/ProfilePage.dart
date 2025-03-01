@@ -181,10 +181,50 @@ class _ProfilePageState extends State<ProfilePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                Text("${user.name}!"),
-                Text("Email: ${user.email}"),
-                Text("Registation No: ${user.registation}"),
-                Text("Department: Software Engineering"),
-                Text("Shahjalal University of Science And Technology, Sylhet.")
+                Divider(thickness: 1,),
+                Row(
+                  children: [
+                    Icon(Icons.email_outlined,color: Colors.deepOrangeAccent,size: 14,),
+                    Text(' Email: ',style: TextStyle(color:Colors.black,fontWeight: FontWeight.bold),),
+                    Text("${user.email}"),
+                  ],
+                ),
+                Divider(thickness: 1,),
+
+                Row(
+                  children: [
+                    Image.asset(
+                      'assets/png/regi.png', // Ensure the correct path
+                      width: 20,
+                      height: 20,
+                      color: Colors.deepOrangeAccent,
+                    ),
+                    Text(
+                      ' Registration: ',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text("${user.registation}"),
+                  ],
+                ),
+                Divider(thickness: 1,),
+                Row(
+                  children: [
+                    Image.asset('assets/png/dept.png', width: 14, height: 14, color:Colors.deepOrangeAccent ,),
+                    Text(' Department: Software Engineering',
+                      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [Image.asset('assets/png/versity.png',width: 14,height: 14, color:Colors.deepOrangeAccent ,),
+                    Text(" Shahjalal University of Science And Technology, Sylhet.",
+                      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,),
+                    ),
+                  ],
+                ),
               ],
                )
               )
