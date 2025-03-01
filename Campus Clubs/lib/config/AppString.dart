@@ -8,4 +8,5 @@ class AppString{
   static const String profile = 'Profile';
   static const String notification = 'Notifications';
   static const String myclubs = "Joined Clubs";
+  static const String loadingtext = "Loading....";
 }

@@ -10,6 +10,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback ?onSettingsClick;
   final String ?Headding;
   final bool ?backpage;
+  final String ?imageUrl;
 
   const MyAppBar({
     super.key,
@@ -17,6 +18,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.onSettingsClick,
     this.Headding,
     this.backpage=false,
+    this.imageUrl,
   });
 
   @override
@@ -47,10 +49,13 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                )
              ),
            ):SizedBox(),
+
            Spacer(),
+
            Center(
                child: Text(Headding ??'', style: AppTexts.AppHeading,)
            ),
+
             Spacer(),
             onSettingsClick!=null
             ?IconButton(onPressed:onSettingsClick , icon: Icon(Icons.settings)):SizedBox(),

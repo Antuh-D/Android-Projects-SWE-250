@@ -10,33 +10,33 @@ class UserProvider with ChangeNotifier {
 
   UserModel? get user => _user;
 
-  Future<void>fetchUserByEmail(String email) async{
+   Future<void>fetchUserByEmail(String email) async {
     final url = Uri.parse("${dotenv.env['API_URL']}/api/user/$email");
 
-    try{
+    try {
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
-       // print("Decoded JSON: $data");
+        //print("Decoded JSON: $data");
 
-
-        if (data == null) {
-          throw Exception("Response data is null");
-        }
         _user = UserModel(
           id: data['_id'],
           name: data['username'],
           email: data['email'],
           registation: data['registration'],
+          profilePicture: data['profilePicture'],
           role: data['role'],
         );
-        notifyListeners(); // Update UI
+        notifyListeners();
       } else {
+        print("Failed to load user: ${response.statusCode}");
         throw Exception('Failed to load user');
       }
-    }catch(error){
-     print("Error fecthing user: $error");
+    } catch (error) {
+      print("Error fetching user: $error");
+      _user = null;
+      notifyListeners();
     }
   }
 

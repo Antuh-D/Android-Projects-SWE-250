@@ -18,7 +18,7 @@ const userSchema = new Schema({
   registration: {
     type: String,
     required: [true, "Registration number is required"],
-    unique: true, // Ensure registration is always provided
+    unique: true, 
   },
   password: {
     type: String,
@@ -30,7 +30,11 @@ const userSchema = new Schema({
     enum: ['user', 'admin'],
     default: 'user',
   },
-}); // Adds createdAt and updatedAt fields
+  profilePicture: {
+    type: String,
+    default: "/assets/me.jpg", // Local default image path
+  },
+});
 
 const UserModel = db.model('User', userSchema);
 

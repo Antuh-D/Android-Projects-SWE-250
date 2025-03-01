@@ -7,11 +7,11 @@ import 'pages/WelcomePage.dart';
 import 'styles/AppColors.dart';
 
 void main() async {
-  await dotenv.load();
+  await dotenv.load(fileName: ".env");
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (context) => UserProvider()),
       ],
       child: MyApp(),
 

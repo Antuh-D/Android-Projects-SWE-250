@@ -1,21 +1,23 @@
+const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const jwt = require("jsonwebtoken");
 const User = require('../models/user.model');
+require('dotenv').config(); 
+
+
 
 // Register user service
 const registerUser = async (userData) => {
   const { username, email, registration, password } = userData;
 
-  // Check if user already exists
   const existingUser = await User.findOne({ email });
   if (existingUser) {
     throw new Error("Email already exists");
   }
 
-  // Hash password
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
 
-  // Create new user with hashed password
   const newUser = new User({
     username,
     email,
@@ -23,11 +25,12 @@ const registerUser = async (userData) => {
     password: hashedPassword,
   });
 
-  // Save the new user to the database
   await newUser.save();
 
   return newUser;
 };
+
+
 
 // Login user service
 const loginUser = async (email, password) => {
@@ -36,18 +39,17 @@ const loginUser = async (email, password) => {
     throw new Error('Invalid credentials');
   }
 
-  // Compare the provided password with the stored hashed password
   const isMatch = await bcrypt.compare(password, existingUser.password);
   if (!isMatch) {
     throw new Error('Invalid credentials');
   }
 
-  // Generate a token (you can implement JWT or any token mechanism here)
-  // For example, with JWT (assuming JWT is installed):
-  // const token = jwt.sign({ userId: existingUser._id }, 'yourSecretKey', { expiresIn: '1h' });
+   const token = jwt.sign({ userId: existingUser._id }, process.env.JWT_SECRET , { expiresIn: '1h' });
   
-  return { user: existingUser }; // For simplicity, returning the user
+  return { user: existingUser ,token}; 
 };
+
+
 
 //search user by email
 const findUserByEmail = async (email) => {
@@ -59,8 +61,44 @@ const findUserByEmail = async (email) => {
   }
 };
 
+
+
+
+//update user info
+const updateUserProfile = async (userId, updateData) => {
+  try {
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      throw new Error('Invalid user ID');
+    }
+
+    //console.log('Update Data:', updateData);
+
+    if (updateData.password) {
+      const salt = await bcrypt.genSalt(10);
+      updateData.password = await bcrypt.hash(updateData.password, salt);
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      updateData,
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedUser) {
+      throw new Error('User not found');
+    }
+
+    return updatedUser;
+  } catch (error) {
+    //console.error('Error in updateUserProfile:', error.message); 
+    throw new Error(`Error updating profile: ${error.message}`);
+  }
+};
+
+
 module.exports = {
   registerUser,
   loginUser,
   findUserByEmail,
+  updateUserProfile
 };
