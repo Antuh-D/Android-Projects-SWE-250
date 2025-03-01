@@ -82,7 +82,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               ? MemoryImage(coverImageBytes!)
                               : coverImageFile != null
                               ? FileImage(coverImageFile!)
-                              : AssetImage('assets/png/fitness_club.jpg') as ImageProvider,
+                              : AssetImage('assets/png/antu.jpg') as ImageProvider,
                           fit: BoxFit.cover,
                         ),
                       ),
