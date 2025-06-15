@@ -69,6 +69,7 @@ class _ProfilePageState extends State<ProfilePage> {
         Headding: AppString.profile,
         backpage: true,
       ),
+<<<<<<< HEAD
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 10),
@@ -92,6 +93,29 @@ class _ProfilePageState extends State<ProfilePage> {
                                 : AssetImage('assets/png/fitness_club.jpg') as ImageProvider,
                             fit: BoxFit.cover,
                           ),
+=======
+      body: Padding(
+        padding: EdgeInsets.symmetric(vertical: 10),
+        child: Column(
+          children: [
+
+            // cover && profile
+            Stack(
+              children: [
+                Stack(
+                  children: [
+                    Container(
+                      width: screenWidth,
+                      height: 300,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: coverImageBytes != null
+                              ? MemoryImage(coverImageBytes!)
+                              : coverImageFile != null
+                              ? FileImage(coverImageFile!)
+                              : AssetImage('assets/png/antu.jpg') as ImageProvider,
+                          fit: BoxFit.cover,
+>>>>>>> c2aa77f9a81763f71d77680c96f7231c1a5c633e
                         ),
                       ),
                       Positioned(

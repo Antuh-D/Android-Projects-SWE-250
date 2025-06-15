@@ -5,7 +5,7 @@
       "subtitle": "Exploring the latest in technology",
       "category": "Technology",
       "members": 120,
-      "image": "assets/png/dataT.png",
+      "image": "assets/png/techenthusiastT.png",
       "followers": 300
     },
     {
@@ -13,7 +13,7 @@
       "subtitle": "Capturing moments beautifully",
       "category": "Art & Media",
       "members": 85,
-      "image": "assets/png/dataT.png",
+      "image": "assets/png/photographyT.png",
       "followers": 220
     },
     {
@@ -21,15 +21,15 @@
       "subtitle": "For those who love to read",
       "category": "Literature",
       "members": 150,
-      "image": "assets/png/dataT.png",
+      "image": "assets/png/bookT.png",
       "followers": 400
     },
     {
-      "name": "Music Band",
+      "name": "RIM",
       "subtitle": "Bringing music to life",
       "category": "Music",
       "members": 60,
-      "image": "assets/png/dataT.png",
+      "image": "assets/png/RIM.png",
       "followers": 180
     },
     {
@@ -37,7 +37,7 @@
       "subtitle": "Gamers unite for fun and competition",
       "category": "Gaming",
       "members": 200,
-      "image": "assets/png/dataT.png",
+      "image": "assets/png/gameT.png",
       "followers": 500
     }
   ],

@@ -73,7 +73,7 @@ class _MyJoinedClubState extends State<MyJoinedClub> {
         child: Column(
           children: [
             AppGridViewBig(
-              cardData: suggestedClubs,
+              cardData: yourClubs,
               cardsPerRow: 1,
               cardHeight: 160,
               spacing: 15,
