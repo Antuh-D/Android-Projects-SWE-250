@@ -7,6 +7,7 @@ class AppTextField extends StatelessWidget{
   final bool obscureText;
   final TextInputType keyboardType;
 
+
   const AppTextField({
     Key? key,
     required this.hint,
