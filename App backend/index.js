@@ -14,7 +14,7 @@ app.use(cors());
 app.use("/assets", express.static("assets"));
 
 
-// Routes
+// Root Routes
 app.use('/api', Routes);
 
 // Start the server

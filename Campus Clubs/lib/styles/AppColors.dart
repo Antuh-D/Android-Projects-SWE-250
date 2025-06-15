@@ -6,4 +6,9 @@ class AppColors{
   static const navigator = Color(0xffe7efeb);
   static const rediobutton1 = Colors.yellow;
   static const rediobutton2 = Color(0xffc1c365);
+  static const icon1 = Color(0xffb1a42e);
+  static const icon2 = Color(0xb30b0a0a);
+  static const icon3 = Color(0xc0c62020);
+  static const icon4 = Color(0xfc250483);
+  static const icon = Color(0xc0c62084);
 }

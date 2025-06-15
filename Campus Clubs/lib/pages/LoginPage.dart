@@ -37,6 +37,10 @@ class _LoginPageState extends State<LoginPage> {
     final String emailValue = email.text.trim();  // Get the email text
     final String passwordValue = password.text.trim();  // Get the password text
 
+    print("Login URL: $_loginUrl");
+    print("Request Body: ${jsonEncode({"email": emailValue, "password": passwordValue})}");
+
+
     // Basic validation to check if fields are empty
     if (emailValue.isEmpty || passwordValue.isEmpty) {
       setState(() {

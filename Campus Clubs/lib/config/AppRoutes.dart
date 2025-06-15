@@ -1,5 +1,8 @@
 
+import 'package:campusclubs/pages/AppClubApprovalPage.dart';
+import 'package:campusclubs/pages/AppProfileEditPage.dart';
 import 'package:campusclubs/pages/MenuPage.dart';
+import 'package:campusclubs/pages/MyClubPage.dart';
 import 'package:campusclubs/pages/ProfilePage.dart';
 import 'package:campusclubs/pages/SearchPage.dart';
 
@@ -14,9 +17,12 @@ class AppRoutes{
     login: (context) => LoginPage(),
     signup: (context)=> SignUpPage(),
     home:(context) => HomePage(),
+    myclubs:(context) => MyClubPage(),
     menus: (context) => MenuPage(),
     search: (context) => SearchPage(),
     profile: (context) => ProfilePage(),
+    clubApproval: (context) => AppClubApprovalPage(),
+    profileedit: (context) => AppProfileEditPage(),
   };
   static const welcomepage = '/';
   static const login = '/login';
@@ -25,4 +31,7 @@ class AppRoutes{
   static const menus = '/menus';
   static const search = '/search';
   static const profile = '/profile';
+  static const myclubs ='/clubs';
+  static const clubApproval = '/apply';
+  static const profileedit = '/infoEdit';
 }

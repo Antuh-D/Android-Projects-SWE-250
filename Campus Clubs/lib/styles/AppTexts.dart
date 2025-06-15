@@ -37,4 +37,5 @@ class AppTexts{
       color: Colors.blue
   );
 
+
 }

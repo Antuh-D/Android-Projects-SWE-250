@@ -9,4 +9,5 @@ class AppString{
   static const String notification = 'Notifications';
   static const String myclubs = "Joined Clubs";
   static const String loadingtext = "Loading....";
+  static const String clubApproval = "Approval Applications";
 }

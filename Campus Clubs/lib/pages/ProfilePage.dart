@@ -1,12 +1,18 @@
 import 'dart:io';
 import 'package:campusclubs/components/MyAppBar.dart';
+import 'package:campusclubs/config/AppRoutes.dart';
 import 'package:campusclubs/config/AppString.dart';
+import 'package:campusclubs/config/AppURL.dart';
+import 'package:campusclubs/styles/AppColors.dart';
+import 'package:campusclubs/styles/AppTexts.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:typed_data';
 import 'package:provider/provider.dart';
+import '../components/AppContainer.dart';
+import '../components/AppTextButton.dart';
 import '../config/UserProvider.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -63,173 +69,243 @@ class _ProfilePageState extends State<ProfilePage> {
         Headding: AppString.profile,
         backpage: true,
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 10),
-        child: Column(
-          children: [
-
-            // cover && profile
-            Stack(
-              children: [
-                Stack(
-                  children: [
-                    Container(
-                      width: screenWidth,
-                      height: 300,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: coverImageBytes != null
-                              ? MemoryImage(coverImageBytes!)
-                              : coverImageFile != null
-                              ? FileImage(coverImageFile!)
-                              : AssetImage('assets/png/fitness_club.jpg') as ImageProvider,
-                          fit: BoxFit.cover,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 10),
+          child: Column(
+            children: [
+        
+              // cover && profile
+              Stack(
+                children: [
+                  Stack(
+                    children: [
+                      Container(
+                        width: screenWidth,
+                        height: 300,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: coverImageBytes != null
+                                ? MemoryImage(coverImageBytes!)
+                                : coverImageFile != null
+                                ? FileImage(coverImageFile!)
+                                : AssetImage('assets/png/fitness_club.jpg') as ImageProvider,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                    ),
-                    Positioned(
-                      top: 10,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 15),
-                        child: Row(
-                          children: [
-                            IconButton(
-                              icon: Icon(Icons.camera_alt, color: Colors.red, size: 30),
-                              onPressed: (){
-                                pickImage('cover');
-                              },
-                            ),
-                            SizedBox(width: screenWidth-100,),
-                            IconButton(
-                              icon: Icon(Icons.edit_calendar_sharp, color: Colors.red, size: 30),
-                              onPressed: (){
-
-                              },
-                            ),
-                          ],
-                        ),
-                      )
-                    ),
-                  ],
-
-                ),
-                Positioned(
-                  bottom: -20,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20,horizontal: (screenWidth/2)-60),
-                    child: Stack(
-                      children: [
-                        Container(
-                          height: 110,
-                          width: 110,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.black,
-                              width: 2,
-                            ),
-                            shape: BoxShape.circle,
-                          ),
-                          child: CircleAvatar(
-                            radius: 60,
-                            backgroundImage: imageBytes != null
-                                ? MemoryImage(imageBytes!)
-                                : imageFile != null
-                                ? FileImage(imageFile!) as ImageProvider
-                                : null,
-                            child: (imageBytes == null && imageFile == null)
-                                ? SvgPicture.asset(
-                              'assets/svgicons/user.svg',
-                              height: 60,
-                            )
-                                : null,
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          right: 0,
+                      Positioned(
+                        top: 10,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 10,top: 3),
                           child: IconButton(
-                            icon: Icon(Icons.camera_alt, color: Colors.red, size: 20),
+                            icon: Icon(Icons.camera_alt, color:Colors.black, size: 30),
                             onPressed: (){
-                              pickImage('profile');
+                              pickImage('cover');
                             },
                           ),
-                        ),
+                        )
+                      ),
+                    ],
+        
+                  ),
+                  Positioned(
+                    bottom: -20,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 20,horizontal: (screenWidth/2)-60),
+                      child: Stack(
+                        children: [
+                          Container(
+                            height: 110,
+                            width: 110,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.black,
+                                width: 2,
+                              ),
+                              shape: BoxShape.circle,
+                            ),
+                            child: CircleAvatar(
+                              radius: 60,
+                              backgroundImage: imageBytes != null
+                                  ? MemoryImage(imageBytes!)
+                                  : imageFile != null
+                                  ? FileImage(imageFile!) as ImageProvider
+                                  : null,
+                              child: (imageBytes == null && imageFile == null)
+                                  ? SvgPicture.asset(
+                                'assets/svgicons/user.svg',
+                                height: 60,
+                              )
+                                  : null,
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            right: 0,
+                            child: IconButton(
+                              icon: Icon(Icons.camera_alt, color: Colors.black, size: 20),
+                              onPressed: (){
+                                pickImage('profile');
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+        
+              //profile basic info
+              Center(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 50),
+                  child: Container(
+                      width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child:  Center(
+                    child: user == null
+                    ? Text("No user logged in")
+                    : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                     Text("${user.name}!",style: AppTexts.AppHeading,),
+                      Divider(thickness: 1,),
+                      Row(
+                        children: [
+                          Icon(Icons.email_outlined,color: AppColors.icon4,size: 20,),
+                          Text(' Email: ${user.email}',style: AppTexts.button),
+                        ],
+                      ),
+                      Divider(thickness: 1,),
+        
+                      Row(
+                        children: [
+                          Image.asset('assets/png/regi.png', width: 25, height: 25, color: AppColors.icon4,),
+                          Text(' Registration: ${user.registation}', style: AppTexts.button),
+                        ],
+                      ),
+                      Divider(thickness: 1,),
+                      Row(
+                        children: [
+                          Image.asset('assets/png/dept.png', width: 20, height: 20, color:AppColors.icon4 ,),
+                          Text(' Department: Software Engineering',style: AppTexts.button),
+                        ],
+                      ),
+                      Row(
+                        children: [Image.asset('assets/png/versity.png',width: 20,height: 20, color:AppColors.icon4,),
+                        const Flexible(
+                        child: Text("Shahjalal University of Science And Technology, Sylhet.", style: AppTexts.button,),
+                         )
+                        ],
+                      ),
+                    ],
+                     )
+                    )
+                  ),
+                ),
+              ),
+        
+              // User Actions
+              AppContainer(
+                child:Padding(
+                  padding: EdgeInsets.only(left: 6),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(AppURL.clubs_svg,height: 25,width: 25,color:AppColors.icon2),
+                      Text(" Your Clubs", style: AppTexts.button2,)
+                    ],
+                  ),
+                ),
+              ),
+              AppContainer(
+                child:AppTextButton(
+                  onPressed: (){
+                     Navigator.of(context).pushNamed(AppRoutes.clubApproval);
+                  },
+                  child: Padding(
+                      padding: EdgeInsets.only(left: 6),
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(AppURL.applications_svg,height: 25,width: 25,),
+                          Text("  Club Approval", style: AppTexts.button2,),
+                        ],
+                      )
+                  ),
+                ),
+              ),
+
+              AppContainer(
+                child:AppTextButton(
+                  onPressed: (){
+                    
+                  },
+                  child: Padding(
+                      padding: EdgeInsets.only(left: 6),
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(AppURL.create_club_svg,height: 25,width:25,color:AppColors.icon3),
+                          Text("  Create Your Club", style: AppTexts.button2,),
+                        ],
+                      )
+                  ),
+                ),
+              ),
+
+              AppContainer(
+                child:AppTextButton(
+                  onPressed: (){
+                    Navigator.of(context).pushNamed(AppRoutes.myclubs);
+                  },
+                  child: Padding(
+                      padding: EdgeInsets.only(left: 6),
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(AppURL.explore_svg,height: 25,width:25,color: AppColors.icon1,),
+                          Text("  Explore New", style: AppTexts.button2,),
+                        ],
+                      )
+                  ),
+                ),
+              ),
+              AppContainer(
+                child:AppTextButton(
+                  onPressed: (){
+                    Navigator.of(context).pushNamed(AppRoutes.profileedit);
+                  },
+                  child: Padding(
+                      padding: EdgeInsets.only(left: 6),
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(AppURL.edit_svg,height: 20,width:20,color:Colors.redAccent,),
+                          Text("   Edit Personal Info", style: AppTexts.button2,),
+                        ],
+                      )
+                  ),
+                ),
+              ),
+              AppContainer(
+                child:AppTextButton(
+                  onPressed: (){
+                    
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 6),
+                    child: Row(
+                      children: [
+                        Icon(Icons.settings_sharp,size: 25, color: AppColors.icon2,),
+                        Text("  Setting", style: AppTexts.button2,)
                       ],
                     ),
                   ),
                 ),
-              ],
-            ),
-
-            //others components
-            Container(
-              width: screenWidth/2,
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(10),
-                // boxShadow: [
-                //   BoxShadow(
-                //     color: Colors.black.withOpacity(0.1),
-                //     offset: const Offset(0, 2),
-                //   ),
-                // ],
               ),
-              child:  Center(
-              child: user == null
-              ? Text("No user logged in")
-              : Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-               Text("${user.name}!"),
-                Divider(thickness: 1,),
-                Row(
-                  children: [
-                    Icon(Icons.email_outlined,color: Colors.deepOrangeAccent,size: 14,),
-                    Text(' Email: ',style: TextStyle(color:Colors.black,fontWeight: FontWeight.bold),),
-                    Text("${user.email}"),
-                  ],
-                ),
-                Divider(thickness: 1,),
-
-                Row(
-                  children: [
-                    Image.asset(
-                      'assets/png/regi.png', // Ensure the correct path
-                      width: 20,
-                      height: 20,
-                      color: Colors.deepOrangeAccent,
-                    ),
-                    Text(
-                      ' Registration: ',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text("${user.registation}"),
-                  ],
-                ),
-                Divider(thickness: 1,),
-                Row(
-                  children: [
-                    Image.asset('assets/png/dept.png', width: 14, height: 14, color:Colors.deepOrangeAccent ,),
-                    Text(' Department: Software Engineering',
-                      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [Image.asset('assets/png/versity.png',width: 14,height: 14, color:Colors.deepOrangeAccent ,),
-                    Text(" Shahjalal University of Science And Technology, Sylhet.",
-                      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,),
-                    ),
-                  ],
-                ),
-              ],
-               )
-              )
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -60,7 +60,7 @@ class _signUpPageState extends State<SignUpPage> {
     print("Response Body: ${response.body}");
 
     if (response.statusCode == 201) {
-      Navigator.of(context).pushNamed(AppRoutes.menus);
+      Navigator.of(context).pushNamed(AppRoutes.login);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Failed to sign up')),
