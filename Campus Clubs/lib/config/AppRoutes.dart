@@ -6,6 +6,7 @@ import 'package:campusclubs/pages/MyClubPage.dart';
 import 'package:campusclubs/pages/ProfilePage.dart';
 import 'package:campusclubs/pages/SearchPage.dart';
 
+import '../pages/AppCreateClubPage.dart';
 import '../pages/HomePage.dart';
 import '../pages/SingUpPage.dart';
 import '../pages/LoginPage.dart';
@@ -23,6 +24,7 @@ class AppRoutes{
     profile: (context) => ProfilePage(),
     clubApproval: (context) => AppClubApprovalPage(),
     profileedit: (context) => AppProfileEditPage(),
+    createClub: (context) => AppCreateClubPage(),
   };
   static const welcomepage = '/';
   static const login = '/login';
@@ -34,4 +36,5 @@ class AppRoutes{
   static const myclubs ='/clubs';
   static const clubApproval = '/apply';
   static const profileedit = '/infoEdit';
+  static const createClub = '/createclub';
 }

@@ -71,6 +71,8 @@ class _ProfilePageState extends State<ProfilePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+
+            //profile and cover picture
             Stack(
               clipBehavior: Clip.none,
               children: [
@@ -89,6 +91,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                 ),
+                //cover pic
                 Positioned(
                   top: 10,
                   right: 10,
@@ -99,6 +102,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     },
                   ),
                 ),
+                //profile pic
                 Positioned(
                   bottom: -50,
                   left: (screenWidth / 2) - 55,
@@ -142,6 +146,8 @@ class _ProfilePageState extends State<ProfilePage> {
               ],
             ),
             SizedBox(height: 60),
+
+            //profile info card
             Center(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 50),
@@ -213,7 +219,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             ),
+
             SizedBox(height: 10),
+
+            //join or suggest clubs
             AppContainer(
               child: Padding(
                 padding: EdgeInsets.only(left: 6),
@@ -226,6 +235,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             ),
+
+            //Approval
             AppContainer(
               child: AppTextButton(
                 onPressed: () {
@@ -243,9 +254,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             ),
+
+            //crete club
             AppContainer(
               child: AppTextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed(AppRoutes.createClub);
+                },
                 child: Padding(
                   padding: EdgeInsets.only(left: 6),
                   child: Row(
@@ -258,6 +273,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             ),
+
+            //explore new
             AppContainer(
               child: AppTextButton(
                 onPressed: () {
@@ -275,6 +292,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             ),
+
+            //personal info edit
             AppContainer(
               child: AppTextButton(
                 onPressed: () {
@@ -294,6 +313,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             ),
+
+            //setting
             AppContainer(
               child: AppTextButton(
                 onPressed: () {},

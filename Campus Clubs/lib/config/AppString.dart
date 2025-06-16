@@ -10,4 +10,5 @@ class AppString{
   static const String myclubs = "Joined Clubs";
   static const String loadingtext = "Loading....";
   static const String clubApproval = "Approval Applications";
+  static const String createClub = "Create Your Club";
 }
