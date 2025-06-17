@@ -34,12 +34,19 @@ class _AppCreateClubPageState extends State<AppCreateClubPage> {
   File? documentFile;
   String? documentName;
 
-  final ImagePicker picker= ImagePicker();
+  final ImagePicker picker = ImagePicker();
 
+  String? get documentDisplay {
+    if (kIsWeb) {
+      return documentName;
+    } else {
+      return documentFile?.path ?? documentName;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: MyAppBar(
         Headding: AppString.createClub,
         backpage: true,
@@ -48,8 +55,7 @@ class _AppCreateClubPageState extends State<AppCreateClubPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
-            //Theme and Heading
+            // Theme and Heading
             Center(child: Image.asset(AppURL.loginTheme, height: 150)),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -66,33 +72,38 @@ class _AppCreateClubPageState extends State<AppCreateClubPage> {
                 )
               ],
             ),
+            Divider(thickness: 1),
+            SizedBox(height: 30),
 
-            Divider(thickness: 1,),
-            SizedBox(height: 30,),
-
-
-            //Club name,email
+            // Club name, email
             AppFormField("1. Enter Club Name", name),
-            SizedBox(height: 16,),
+            SizedBox(height: 16),
             AppFormField("2. Enter Club Email", email),
 
-            //category
+            // category
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16,vertical: 16),
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("3. Select One",style: AppTexts.normal,),
-                  SizedBox(height: 5,),
+                  Text("3. Select One", style: AppTexts.normal),
+                  SizedBox(height: 5),
                   DropdownButtonFormField(
                     items: ["Tech", "Culture", "Sports"]
-                        .map((c) => DropdownMenuItem(
-                      value: c,
-                      child: Text(c,),),).toList(),
+                        .map(
+                          (c) => DropdownMenuItem(
+                        value: c,
+                        child: Text(c),
+                      ),
+                    )
+                        .toList(),
                     onChanged: (value) {
-                      category=value;
+                      setState(() {
+                        category = value as String?;
+                      });
                     },
-                    decoration: InputDecoration(labelText: "Club Category",
+                    decoration: InputDecoration(
+                      labelText: "Club Category",
                       labelStyle: TextStyle(color: Colors.black),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
@@ -105,51 +116,63 @@ class _AppCreateClubPageState extends State<AppCreateClubPage> {
                         ),
                       ),
                       filled: true,
-                      fillColor:Colors.white.withOpacity(0.9),
-
+                      fillColor: Colors.white.withOpacity(0.9),
                     ),
                     dropdownColor: Colors.white,
                   ),
-                ],),
+                ],
+              ),
             ),
 
-            //subtitle,contract
+            // subtitle, contract
             AppFormField("4. Write a Subtitle", subtitle, hint: "Related to club goal"),
-            SizedBox(height: 16,),
+            SizedBox(height: 16),
             AppFormField("5. Contract No", contract, hint: "with country code"),
 
-            //file input
+            // file input
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16,vertical: 16),
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CreateTextButton(labelText:"6. Upload Current Club Committee(pdf,doc,docx)" , iconAsset:Icon(Icons.upload_file_rounded,size: 20,color: AppColors.icon2,) , textStyle: AppTexts.normal,
-                      onPressed: (){
-                        pickFile('doc');
-                      }),
-                  SizedBox(height: 16,),
-                  CreateTextButton(labelText:"7. Upload The Club logo", iconAsset:Icon(Icons.manage_accounts,color:AppColors.icon2,size: 25,) , textStyle: AppTexts.normal,
-                      onPressed: (){
-                        pickFile('image');
-                      }),
-                  if (imageFile != null)
-                    Text("Selected: ${imageFile!.path}"),
-                  if (imageBytes != null)
-                    Text("Logo uploaded successfully (Web)"),
+                  CreateTextButton(
+                    labelText: "6. Upload Current Club Committee(pdf,doc,docx)",
+                    iconAsset: Icon(Icons.upload_file_rounded, size: 20, color: AppColors.icon2),
+                    textStyle: AppTexts.normal,
+                    onPressed: () {
+                      pickFile('doc');
+                    },
+                  ),
+                  if (documentDisplay != null)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8),
+                      child: Text("$documentDisplay"),
+                    ),
+
+                  SizedBox(height: 16),
+
+                  CreateTextButton(
+                    labelText: "7. Upload The Club logo",
+                    iconAsset: Icon(Icons.manage_accounts, color: AppColors.icon2, size: 25),
+                    textStyle: AppTexts.normal,
+                    onPressed: () {
+                      pickFile('image');
+                    },
+                  ),
+                  if (imageFile != null) Text("${imageFile!.path}"),
+                  if (imageBytes != null) Text("Logo uploaded successfully "),
                 ],
               ),
-
             ),
 
-            //submit button
+            // submit button
             Padding(
               padding: EdgeInsets.all(16),
               child: ElevatedButton(
                 onPressed: () {
-                  // Submit logic here
+                  
                 },
-                child: Text("Submit",style: AppTexts.button,),
+                child: Text("Submit", style: AppTexts.button),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.buttonColor,
                 ),
@@ -163,7 +186,7 @@ class _AppCreateClubPageState extends State<AppCreateClubPage> {
 
   Widget AppFormField(String label, TextEditingController controller, {String hint = ""}) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16,),
+      padding: EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -174,11 +197,10 @@ class _AppCreateClubPageState extends State<AppCreateClubPage> {
     );
   }
 
-
   Widget CreateTextButton({
     required VoidCallback onPressed,
     required String labelText,
-    required final Widget iconAsset,
+    required Widget iconAsset,
     required TextStyle textStyle,
   }) {
     return Row(
@@ -221,12 +243,21 @@ class _AppCreateClubPageState extends State<AppCreateClubPage> {
         type: FileType.custom,
         allowedExtensions: ['pdf', 'doc', 'docx'],
       );
-      if (result != null && (result.files.single.bytes != null || result.files.single.path != null)) {
+      if (result != null &&
+          (result.files.single.bytes != null || result.files.single.path != null)) {
         final file = result.files.single;
+
         setState(() {
           documentName = file.name;
           documentBytes = file.bytes;
-          documentFile = file.path != null ? File(file.path!) : null;
+
+          if (kIsWeb) {
+            // On web, do NOT create File instance
+            documentFile = null;
+          } else {
+            // On mobile/desktop, create File instance if path exists
+            documentFile = file.path != null ? File(file.path!) : null;
+          }
         });
       }
     }
