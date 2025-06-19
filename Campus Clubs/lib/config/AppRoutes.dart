@@ -1,5 +1,6 @@
 
 import 'package:campusclubs/pages/AppClubApprovalPage.dart';
+import 'package:campusclubs/pages/AppClubViewPage.dart';
 import 'package:campusclubs/pages/AppProfileEditPage.dart';
 import 'package:campusclubs/pages/MenuPage.dart';
 import 'package:campusclubs/pages/MyClubPage.dart';

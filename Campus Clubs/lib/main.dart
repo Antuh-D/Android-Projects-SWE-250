@@ -2,6 +2,7 @@ import 'package:campusclubs/config/AppRoutes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
+import 'config/ClubProvider.dart';
 import 'config/UserProvider.dart';
 import 'pages/WelcomePage.dart';
 import 'styles/AppColors.dart';
@@ -12,6 +13,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => ClubProvider()),
       ],
       child: MyApp(),
     ),

@@ -194,10 +194,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                 height: 20,
                                 color: AppColors.icon4),
                             SizedBox(width: 5),
-                            Text('Department: Software Engineering',
+                            Text('Department: ${user.department}',
                                 style: AppTexts.button),
                           ],
                         ),
+                        SizedBox(height: 8,),
                         Row(
                           children: [
                             Image.asset('assets/png/versity.png',
@@ -207,7 +208,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             SizedBox(width: 5),
                             Flexible(
                               child: Text(
-                                "Shahjalal University of Science And Technology, Sylhet.",
+                                "Institute: ${user.university}",
                                 style: AppTexts.button,
                               ),
                             )
@@ -297,7 +298,7 @@ class _ProfilePageState extends State<ProfilePage> {
             AppContainer(
               child: AppTextButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed(AppRoutes.profileedit);
+                  Navigator.of(context).pushReplacementNamed(AppRoutes.profileedit);
                 },
                 child: Padding(
                   padding: EdgeInsets.only(left: 6),

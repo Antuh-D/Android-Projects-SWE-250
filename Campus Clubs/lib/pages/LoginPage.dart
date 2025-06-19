@@ -60,7 +60,12 @@ class _LoginPageState extends State<LoginPage> {
       final responseData = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        Provider.of<UserProvider>(context, listen: false).fetchUserByEmail(emailValue);
+        final token = responseData['token'];
+        final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+        userProvider.setToken(token);
+        await userProvider.fetchUserByEmail(emailValue);
+
         Navigator.pushNamed(context, AppRoutes.menus);  // Navigate to Home page
       } else {
         setState(() {

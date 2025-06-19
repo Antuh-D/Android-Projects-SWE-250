@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 
 class UserProvider with ChangeNotifier {
   UserModel? _user;
+  String? token;
 
   UserModel? get user => _user;
 
@@ -26,6 +27,8 @@ class UserProvider with ChangeNotifier {
           email: data['email'],
           registation: data['registration'],
           profilePicture: data['profilePicture'],
+          department: data['department'],
+          university: data['university'],
           role: data['role'],
         );
         notifyListeners();
@@ -43,6 +46,16 @@ class UserProvider with ChangeNotifier {
   // Method to clear user on logout
   void logout() {
     _user = null;
+    notifyListeners();
+  }
+
+  void setToken(String newToken) {
+    token = newToken;
+    notifyListeners();
+  }
+
+  void updateUserFromJson(Map<String, dynamic> json) {
+    _user = UserModel.fromJson(json);
     notifyListeners();
   }
 }

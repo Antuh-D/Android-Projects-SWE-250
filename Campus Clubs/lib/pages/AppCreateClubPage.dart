@@ -1,9 +1,12 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import '../components/AppTextField.dart';
@@ -12,6 +15,7 @@ import '../config/AppString.dart';
 import '../config/AppURL.dart';
 import '../styles/AppColors.dart';
 import '../styles/AppTexts.dart';
+
 
 class AppCreateClubPage extends StatefulWidget {
   const AppCreateClubPage({super.key});
@@ -25,6 +29,10 @@ class _AppCreateClubPageState extends State<AppCreateClubPage> {
   final TextEditingController email = TextEditingController();
   final TextEditingController contract = TextEditingController();
   final TextEditingController subtitle = TextEditingController();
+  final TextEditingController description = TextEditingController();
+  final TextEditingController facebookLink = TextEditingController();
+  final TextEditingController president = TextEditingController();
+  final TextEditingController vicePresident = TextEditingController();
   String? category;
 
   Uint8List? imageBytes;
@@ -35,14 +43,6 @@ class _AppCreateClubPageState extends State<AppCreateClubPage> {
   String? documentName;
 
   final ImagePicker picker = ImagePicker();
-
-  String? get documentDisplay {
-    if (kIsWeb) {
-      return documentName;
-    } else {
-      return documentFile?.path ?? documentName;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,32 +55,20 @@ class _AppCreateClubPageState extends State<AppCreateClubPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Theme and Heading
             Center(child: Image.asset(AppURL.loginTheme, height: 150)),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SvgPicture.asset(
-                  AppURL.mens_icon,
-                  height: 30,
-                  width: 30,
-                  color: Colors.black,
-                ),
-                Text(
-                  "Your Club",
-                  style: AppTexts.AppHeading,
-                )
+                SvgPicture.asset(AppURL.mens_icon, height: 30, width: 30, color: Colors.black),
+                Text("Your Club", style: AppTexts.AppHeading),
               ],
             ),
             Divider(thickness: 1),
             SizedBox(height: 30),
-
-            // Club name, email
             AppFormField("1. Enter Club Name", name),
             SizedBox(height: 16),
             AppFormField("2. Enter Club Email", email),
 
-            // category
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               child: Column(
@@ -90,12 +78,7 @@ class _AppCreateClubPageState extends State<AppCreateClubPage> {
                   SizedBox(height: 5),
                   DropdownButtonFormField(
                     items: ["Tech", "Culture", "Sports"]
-                        .map(
-                          (c) => DropdownMenuItem(
-                        value: c,
-                        child: Text(c),
-                      ),
-                    )
+                        .map((c) => DropdownMenuItem(value: c, child: Text(c)))
                         .toList(),
                     onChanged: (value) {
                       setState(() {
@@ -110,10 +93,7 @@ class _AppCreateClubPageState extends State<AppCreateClubPage> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
-                        borderSide: BorderSide(
-                          color: Colors.black38,
-                          width: 2.0,
-                        ),
+                        borderSide: BorderSide(color: Colors.black38, width: 2.0),
                       ),
                       filled: true,
                       fillColor: Colors.white.withOpacity(0.9),
@@ -124,35 +104,35 @@ class _AppCreateClubPageState extends State<AppCreateClubPage> {
               ),
             ),
 
-            // subtitle, contract
             AppFormField("4. Write a Subtitle", subtitle, hint: "Related to club goal"),
             SizedBox(height: 16),
             AppFormField("5. Contract No", contract, hint: "with country code"),
+            SizedBox(height: 16),
+            AppFormField("6. Club Description", description, hint: "What is your club about"),
+            SizedBox(height: 16),
+            AppFormField("7. Facebook Page URL", facebookLink),
+            SizedBox(height: 16),
+            AppFormField("8. Club President", president),
+            SizedBox(height: 16),
+            AppFormField("9. Vice President", vicePresident),
 
-            // file input
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CreateTextButton(
-                    labelText: "6. Upload Current Club Committee(pdf,doc,docx)",
+                    labelText: "10. Upload Current Club Committee(pdf,doc,docx)",
                     iconAsset: Icon(Icons.upload_file_rounded, size: 20, color: AppColors.icon2),
                     textStyle: AppTexts.normal,
                     onPressed: () {
                       pickFile('doc');
                     },
                   ),
-                  if (documentDisplay != null)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8),
-                      child: Text("$documentDisplay"),
-                    ),
-
+                  if (documentName != null) Text("Selected: $documentName"),
                   SizedBox(height: 16),
-
                   CreateTextButton(
-                    labelText: "7. Upload The Club logo",
+                    labelText: "11. Upload The Club logo",
                     iconAsset: Icon(Icons.manage_accounts, color: AppColors.icon2, size: 25),
                     textStyle: AppTexts.normal,
                     onPressed: () {
@@ -160,17 +140,52 @@ class _AppCreateClubPageState extends State<AppCreateClubPage> {
                     },
                   ),
                   if (imageFile != null) Text("${imageFile!.path}"),
-                  if (imageBytes != null) Text("Logo uploaded successfully "),
+                  if (imageBytes != null) Text("Logo uploaded successfully (Web)"),
                 ],
               ),
             ),
 
-            // submit button
             Padding(
               padding: EdgeInsets.all(16),
               child: ElevatedButton(
-                onPressed: () {
-                  
+                onPressed: () async {
+                  if (category == null || category!.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Please select a category')),
+                    );
+                    return;
+                  }
+
+                  String? base64Image;
+                  if (imageBytes != null) {
+                    base64Image = base64Encode(imageBytes!);
+                  }
+
+                  final newClub = {
+                    "name": name.text.trim(),
+                    "subtitle": subtitle.text.trim(),
+                    "description": description.text.trim(),
+                    "email": email.text.trim(),
+                    "phone": contract.text.trim(),
+                    "category": category,
+                    "facebookLink": facebookLink.text.trim(),
+                    "president": president.text.trim(),
+                    "vicePresident": vicePresident.text.trim(),
+                    "createdAt": DateTime.now().toIso8601String(),
+                    "isApproved": false,
+                    "followers": 0,
+                    "members": 0,
+                    "image": base64Image ?? "",
+                  };
+
+                  bool success = await submitClub(newClub);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(success
+                          ? 'Club created successfully!'
+                          : 'Failed to create club'),
+                    ),
+                  );
                 },
                 child: Text("Submit", style: AppTexts.button),
                 style: ElevatedButton.styleFrom(
@@ -250,16 +265,34 @@ class _AppCreateClubPageState extends State<AppCreateClubPage> {
         setState(() {
           documentName = file.name;
           documentBytes = file.bytes;
-
-          if (kIsWeb) {
-            // On web, do NOT create File instance
-            documentFile = null;
-          } else {
-            // On mobile/desktop, create File instance if path exists
-            documentFile = file.path != null ? File(file.path!) : null;
+          if (!kIsWeb && file.path != null) {
+            documentFile = File(file.path!);
           }
         });
       }
     }
   }
+
+  Future<bool> submitClub(Map<String, dynamic> clubData) async {
+    final url = Uri.parse('${dotenv.env['API_URL']}/api/club');
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(clubData),
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return true;
+      } else {
+        print("Failed to submit club: ${response.statusCode} - ${response.body}");
+        return false;
+      }
+    } catch (e) {
+      print("Error submitting club: $e");
+      return false;
+    }
+  }
 }
+

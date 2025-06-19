@@ -4,15 +4,45 @@ class UserModel{
   final String email;
   final String registation;
   final String profilePicture;
+  final String department;
+  final String university;
   final String role;
 
 
-  UserModel( {
+  UserModel({
     required this.id,
     required this.name,
     required this.email,
     required this.registation,
     required this.profilePicture,
     required this.role,
+    required this.department,
+    required this.university
   });
+
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      id: json['_id'] ?? '',
+      name: json['username'] ?? '',  // backend uses username for name
+      email: json['email'] ?? '',
+      registation: json['registration'] ?? '',
+      profilePicture: json['profilePicture'] ?? '',
+      department: json['department'] ?? '',
+      university: json['university'] ?? '',
+      role: json['role'] ?? '',
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': id,
+      'username': name,
+      'email': email,
+      'registration': registation,
+      'profilePicture': profilePicture,
+      'department': department,
+      'university': university,
+      'role': role,
+    };
+  }
 }

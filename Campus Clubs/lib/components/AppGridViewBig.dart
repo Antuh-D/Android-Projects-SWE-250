@@ -1,6 +1,6 @@
+import 'package:campusclubs/pages/AppClubViewPage.dart';
 import 'package:flutter/material.dart';
 
-import 'DisplayCardSmall.dart';
 import 'MyClubsCardview.dart';
 
 class AppGridViewBig extends StatelessWidget {
@@ -48,7 +48,12 @@ class AppGridViewBig extends StatelessWidget {
               followers: cardData[index]['followers'],
               category: cardData[index]['category'],
               onTap: () {
-
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>AppClubViewPage(club:cardData[index]),
+                  ),
+                );
               },),
           );
         },
