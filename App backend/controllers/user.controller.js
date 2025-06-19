@@ -1,4 +1,6 @@
 const authService = require('../services/user.service');
+const user = require('../models/user.model');
+const bcrypt = require('bcrypt');
 
 // Register user
 const registerUser = async (req, res) => {
@@ -47,32 +49,50 @@ const findUserByEmail = async (req, res) => {
 //Update user profile
 const updateUserProfile = async (req, res) => {
   try {
-    console.log(req.user);
-    const userid = req.user.userId;
+    const {
+      _id: userId,
+      username,
+      email,
+      registration,
+      department,
+      university,
+      oldPassword,
+      newPassword
+    } = req.body;
 
-    if (!userid) {
+    if (!userId) {
       return res.status(400).json({ error: 'User ID is missing' });
     }
 
-    const { username, email, password } = req.body;
+    const updateData = {};
 
-    let updateData = {};
+    // Add provided fields
     if (username) updateData.username = username;
     if (email) updateData.email = email;
-    if (password) updateData.password = password;
+    if (registration) updateData.registration = registration;
+    if (department) updateData.department = department;
+    if (university) updateData.university = university;
 
-    if (req.file) {
-      updateData.profilePicture = `/uploads/${req.file.filename}`;
+    // Handle password update
+    if (oldPassword && newPassword) {
+      const user = await authService.findUserById(userId);
+      const isMatch = await bcrypt.compare(oldPassword, user.password);
+      if (!isMatch) {
+        return res.status(400).json({ error: 'Old password is incorrect' });
+      }
+
+      const salt = await bcrypt.genSalt(10);
+      updateData.password = await bcrypt.hash(newPassword, salt);
     }
 
+    // Prevent empty update
     if (Object.keys(updateData).length === 0) {
-      return res.status(400).json({ error: "No valid data to update" });
+      return res.status(400).json({ error: 'No valid data to update' });
     }
 
-    const updatedUser = await authService.updateUserProfile(userid, updateData);
-
+    const updatedUser = await authService.updateUserProfile(userId, updateData);
     res.status(200).json({
-      message: "Profile updated successfully",
+      message: 'Profile updated successfully',
       user: updatedUser,
     });
   } catch (error) {

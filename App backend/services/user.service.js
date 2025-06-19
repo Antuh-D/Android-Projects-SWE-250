@@ -71,13 +71,6 @@ const updateUserProfile = async (userId, updateData) => {
       throw new Error('Invalid user ID');
     }
 
-    //console.log('Update Data:', updateData);
-
-    if (updateData.password) {
-      const salt = await bcrypt.genSalt(10);
-      updateData.password = await bcrypt.hash(updateData.password, salt);
-    }
-
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       updateData,
@@ -90,15 +83,21 @@ const updateUserProfile = async (userId, updateData) => {
 
     return updatedUser;
   } catch (error) {
-    //console.error('Error in updateUserProfile:', error.message); 
     throw new Error(`Error updating profile: ${error.message}`);
   }
 };
+
+
+const findUserById = async (userId) => {
+return await User.findById(userId);
+};
+
 
 
 module.exports = {
   registerUser,
   loginUser,
   findUserByEmail,
-  updateUserProfile
+  updateUserProfile,
+  findUserById,
 };

@@ -28,12 +28,20 @@ const userSchema = new Schema({
   role: {
     type: String,
     enum: ['user', 'admin','varsity'],
-    default: 'varsity',
+    default: 'user',
   },
   profilePicture: {
     type: String,
     default: "/assets/me.jpg", // Local default image path
   },
+  department:{
+  type:String,
+  default:"Software Engineering",
+  },
+  university:{
+  type:String,
+  default:"SUST",
+  }
 });
 
 const UserModel = db.model('User', userSchema);
