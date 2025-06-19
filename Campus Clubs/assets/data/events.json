@@ -1,0 +1,226 @@
+{
+  "upcoming": [
+    {
+      "id": "1",
+      "title": "Tech Talk: Future of AI",
+      "club": "Tech Enthusiasts",
+      "category": "Technology",
+      "date": "2025-07-10",
+      "time": "16:00",
+      "location": "Auditorium A",
+      "description": "A panel discussion on how AI is shaping the future.",
+      "image": "assets/png/techenthusiastT.png"
+    },
+    {
+      "id": "2",
+      "title": "Photography Walk",
+      "club": "Photography Club",
+      "category": "Art & Media",
+      "date": "2025-06-25",
+      "time": "07:00",
+      "location": "Central Park",
+      "description": "Capture the morning light and learn street photography tips.",
+      "image": "assets/png/techenthusiastT.png"
+    },
+    {
+      "id": "3",
+      "title": "Startup Pitch Night",
+      "club": "Entrepreneurship Club",
+      "category": "Business",
+      "date": "2025-07-01",
+      "time": "18:30",
+      "location": "Innovation Hub",
+      "description": "Students present startup ideas to a panel of investors.",
+      "image": "assets/png/techenthusiastT.png"
+    },
+    {
+      "id": "4",
+      "title": "Poetry Slam",
+      "club": "Literary Circle",
+      "category": "Literature",
+      "date": "2025-06-30",
+      "time": "19:00",
+      "location": "Cafe Lounge",
+      "description": "An open mic evening of poetic expression and creativity.",
+      "image": "assets/png/techenthusiastT.png"
+    },
+    {
+      "id": "5",
+      "title": "Robotics Demo Day",
+      "club": "Robotics Club",
+      "category": "Technology",
+      "date": "2025-07-15",
+      "time": "14:00",
+      "location": "Lab 3B",
+      "description": "Students showcase robots built during the semester.",
+      "image": "assets/png/techenthusiastT.png"
+    },
+    {
+      "id": "6",
+      "title": "Cultural Fest Rehearsal",
+      "club": "Cultural Club",
+      "category": "Culture",
+      "date": "2025-06-22",
+      "time": "17:00",
+      "location": "Main Hall",
+      "description": "Practice session for all groups performing in the fest.",
+      "image": "assets/png/techenthusiastT.png"
+    },
+    {
+      "id": "7",
+      "title": "Chess Championship",
+      "club": "Chess Club",
+      "category": "Sports",
+      "date": "2025-07-05",
+      "time": "10:00",
+      "location": "Room 101",
+      "description": "Annual inter-club chess tournament.",
+      "image": "assets/png/techenthusiastT.png"
+    },
+    {
+      "id": "8",
+      "title": "Drama Workshop",
+      "club": "Drama Society",
+      "category": "Theatre",
+      "date": "2025-07-12",
+      "time": "13:00",
+      "location": "Black Box Theatre",
+      "description": "Learn the basics of stage acting and improvisation.",
+      "image": "assets/png/techenthusiastT.png"
+    },
+    {
+      "id": "9",
+      "title": "Debate Competition",
+      "club": "Debate Club",
+      "category": "Academics",
+      "date": "2025-06-28",
+      "time": "11:00",
+      "location": "Conference Room",
+      "description": "Topic: Should AI be regulated globally?",
+      "image": "assets/png/techenthusiastT.png"
+    },
+    {
+      "id": "10",
+      "title": "Eco Awareness Drive",
+      "club": "Green Earth",
+      "category": "Environment",
+      "date": "2025-07-03",
+      "time": "09:00",
+      "location": "Campus Gate",
+      "description": "Tree plantation and plastic-free campus awareness.",
+      "image": "assets/png/techenthusiastT.png"
+    }
+  ],
+  "closed": [
+    {
+      "id": "11",
+      "title": "Spring Music Festival",
+      "club": "Music Society",
+      "category": "Entertainment",
+      "date": "2025-05-10",
+      "time": "18:00",
+      "location": "Open Grounds",
+      "description": "Live music and performances from various student bands.",
+      "image": "assets/png/gameT.png"
+    },
+    {
+      "id": "12",
+      "title": "Winter Art Exhibit",
+      "club": "Artistic Minds",
+      "category": "Art",
+      "date": "2025-01-20",
+      "time": "10:00",
+      "location": "Gallery Room",
+      "description": "Showcasing student art projects from the past semester.",
+      "image": "assets/png/gameT.png"
+    },
+    {
+      "id": "13",
+      "title": "Autumn Literature Meet",
+      "club": "Literary Circle",
+      "category": "Literature",
+      "date": "2025-03-15",
+      "time": "17:00",
+      "location": "Library Room 2",
+      "description": "Discussion and readings from emerging writers.",
+      "image": "assets/png/gameT.png"
+    },
+    {
+      "id": "14",
+      "title": "Science Fair",
+      "club": "Science Club",
+      "category": "Science",
+      "date": "2025-04-05",
+      "time": "09:00",
+      "location": "Tech Hall",
+      "description": "Showcase of innovative student science projects.",
+      "image": "assets/png/gameT.png"
+    },
+    {
+      "id": "15",
+      "title": "Spring Debate Tournament",
+      "club": "Debate Club",
+      "category": "Communication",
+      "date": "2025-05-25",
+      "time": "14:00",
+      "location": "Room 101",
+      "description": "Inter-college debate competition with multiple rounds.",
+      "image": "assets/png/gameT.png"
+    },
+    {
+      "id": "16",
+      "title": "Chess Summer Cup",
+      "club": "Chess Club",
+      "category": "Sports",
+      "date": "2025-04-30",
+      "time": "11:00",
+      "location": "Room 102",
+      "description": "Summer edition of the chess championship.",
+      "image": "assets/png/gameT.png"
+    },
+    {
+      "id": "17",
+      "title": "Robotics Challenge 2025",
+      "club": "Robotics Club",
+      "category": "Technology",
+      "date": "2025-05-18",
+      "time": "13:00",
+      "location": "Lab 3B",
+      "description": "Competitive robotics challenge for advanced students.",
+      "image": "assets/png/gameT.png"
+    },
+    {
+      "id": "18",
+      "title": "Cultural Night",
+      "club": "Cultural Club",
+      "category": "Culture",
+      "date": "2025-03-28",
+      "time": "19:00",
+      "location": "Main Hall",
+      "description": "An evening of diverse cultural performances.",
+      "image": "assets/png/gameT.png"
+    },
+    {
+      "id": "19",
+      "title": "Coding Bootcamp",
+      "club": "CodeAcademy",
+      "category": "Technology",
+      "date": "2025-05-08",
+      "time": "09:00",
+      "location": "Lab 1C",
+      "description": "Intensive 5-day crash course in full stack development.",
+      "image": "assets/png/gameT.png"
+    },
+    {
+      "id": "20",
+      "title": "Food Festival",
+      "club": "Culinary Club",
+      "category": "Food",
+      "date": "2025-04-12",
+      "time": "12:00",
+      "location": "Cafeteria",
+      "description": "Tasting international cuisines prepared by students.",
+      "image": "assets/png/gameT.png"
+    }
+  ]
+}
