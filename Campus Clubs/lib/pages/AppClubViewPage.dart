@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../config/ClubModel.dart';
 
@@ -19,11 +20,18 @@ class AppClubViewPage extends StatelessWidget {
             // Club image
             ClipRRect(
               borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
-              child: Image.asset(
-                club.image,
+              child: club.image.isNotEmpty
+                  ? Image.memory(
+                base64Decode(club.image),
                 width: double.infinity,
                 height: 200,
                 fit: BoxFit.cover,
+              )
+                  : Container(
+                width: double.infinity,
+                height: 200,
+                color: Colors.grey[300],
+                child: Icon(Icons.image_not_supported),
               ),
             ),
 

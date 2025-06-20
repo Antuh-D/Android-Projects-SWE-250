@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:file_picker/file_picker.dart';
+import 'package:campusclubs/pages/AppClubViewPage.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/foundation.dart';
@@ -13,9 +13,9 @@ import '../components/AppTextField.dart';
 import '../components/MyAppBar.dart';
 import '../config/AppString.dart';
 import '../config/AppURL.dart';
+import '../config/ClubModel.dart';
 import '../styles/AppColors.dart';
 import '../styles/AppTexts.dart';
-
 
 class AppCreateClubPage extends StatefulWidget {
   const AppCreateClubPage({super.key});
@@ -37,10 +37,6 @@ class _AppCreateClubPageState extends State<AppCreateClubPage> {
 
   Uint8List? imageBytes;
   File? imageFile;
-
-  Uint8List? documentBytes;
-  File? documentFile;
-  String? documentName;
 
   final ImagePicker picker = ImagePicker();
 
@@ -122,21 +118,11 @@ class _AppCreateClubPageState extends State<AppCreateClubPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CreateTextButton(
-                    labelText: "10. Upload Current Club Committee(pdf,doc,docx)",
-                    iconAsset: Icon(Icons.upload_file_rounded, size: 20, color: AppColors.icon2),
-                    textStyle: AppTexts.normal,
-                    onPressed: () {
-                      pickFile('doc');
-                    },
-                  ),
-                  if (documentName != null) Text("Selected: $documentName"),
-                  SizedBox(height: 16),
-                  CreateTextButton(
-                    labelText: "11. Upload The Club logo",
+                    labelText: "10. Upload The Club logo",
                     iconAsset: Icon(Icons.manage_accounts, color: AppColors.icon2, size: 25),
                     textStyle: AppTexts.normal,
                     onPressed: () {
-                      pickFile('image');
+                      pickFile();
                     },
                   ),
                   if (imageFile != null) Text("${imageFile!.path}"),
@@ -179,13 +165,20 @@ class _AppCreateClubPageState extends State<AppCreateClubPage> {
                   };
 
                   bool success = await submitClub(newClub);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(success
-                          ? 'Club created successfully!'
-                          : 'Failed to create club'),
-                    ),
-                  );
+
+                  if (success) {
+                    final ClubModel createdClub = ClubModel.fromJson(newClub);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AppClubViewPage(club: createdClub),
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Failed to create club')),
+                    );
+                  }
                 },
                 child: Text("Submit", style: AppTexts.button),
                 style: ElevatedButton.styleFrom(
@@ -236,38 +229,19 @@ class _AppCreateClubPageState extends State<AppCreateClubPage> {
     );
   }
 
-  Future<void> pickFile(String type) async {
-    if (type == 'image') {
-      final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-      if (pickedFile != null) {
-        if (kIsWeb) {
-          final bytes = await pickedFile.readAsBytes();
-          setState(() {
-            imageBytes = bytes;
-            imageFile = null;
-          });
-        } else {
-          setState(() {
-            imageFile = File(pickedFile.path);
-            imageBytes = null;
-          });
-        }
-      }
-    } else if (type == 'doc') {
-      final result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['pdf', 'doc', 'docx'],
-      );
-      if (result != null &&
-          (result.files.single.bytes != null || result.files.single.path != null)) {
-        final file = result.files.single;
-
+  Future<void> pickFile() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      if (kIsWeb) {
+        final bytes = await pickedFile.readAsBytes();
         setState(() {
-          documentName = file.name;
-          documentBytes = file.bytes;
-          if (!kIsWeb && file.path != null) {
-            documentFile = File(file.path!);
-          }
+          imageBytes = bytes;
+          imageFile = null;
+        });
+      } else {
+        setState(() {
+          imageFile = File(pickedFile.path);
+          imageBytes = null;
         });
       }
     }
@@ -295,4 +269,3 @@ class _AppCreateClubPageState extends State<AppCreateClubPage> {
     }
   }
 }
-

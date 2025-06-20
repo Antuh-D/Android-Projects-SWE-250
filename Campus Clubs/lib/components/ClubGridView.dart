@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../config/ClubModel.dart';
 import '../pages/AppClubViewPage.dart';
@@ -31,7 +32,7 @@ class ClubGridView extends StatelessWidget {
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: cardData.length,
+      itemCount: 2,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: cardsPerRow,
         crossAxisSpacing: spacing,
@@ -61,11 +62,17 @@ class ClubGridView extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12),
-                    child: Image.asset(
-                      club.image,
+                    child: club.image.isNotEmpty
+                        ? Image.memory(
+                      base64Decode(club.image),
                       width: 100,
                       height: double.infinity,
                       fit: BoxFit.cover,
+                    )
+                        : Container(
+                      width: 100,
+                      color: Colors.grey[300],
+                      child: Icon(Icons.image_not_supported),
                     ),
                   ),
                   const SizedBox(width: 10),

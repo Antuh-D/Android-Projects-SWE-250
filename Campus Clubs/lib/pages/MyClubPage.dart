@@ -9,6 +9,7 @@ import '../config/ClubModel.dart';
 import '../config/ClubProvider.dart';
 import '../components/AppGridViewSmall.dart';
 import '../components/ClubGridView.dart';
+import 'AppAllClubViewPage.dart';
 
 class MyClubPage extends StatefulWidget {
   const MyClubPage({super.key});
@@ -43,12 +44,13 @@ class _MyJoinedClubState extends State<MyJoinedClub> {
   List<ClubModel> yourClubs = [];
   List<ClubModel> suggestedClubs = [];
   bool isLoading = true;
+  late Future<void> _clubsFuture;
 
   @override
   void initState() {
     super.initState();
+    _clubsFuture = Provider.of<ClubProvider>(context, listen: false).fetchAllClubs();
     loadClubs();
-    Provider.of<ClubProvider>(context, listen: false).fetchAllClubs();
   }
 
   Future<void> loadClubs() async {
@@ -69,14 +71,10 @@ class _MyJoinedClubState extends State<MyJoinedClub> {
 
   @override
   Widget build(BuildContext context) {
-    final clubProvider = Provider.of<ClubProvider>(context);
-    final clubs = clubProvider.clubs;
+      final clubProvider = Provider.of<ClubProvider>(context);
+      final clubs = clubProvider.clubs;
 
-    if (isLoading) {
-      return const Center(child: CircularProgressIndicator());
-    }
-
-    return SingleChildScrollView(
+      return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
@@ -85,7 +83,7 @@ class _MyJoinedClubState extends State<MyJoinedClub> {
               cardData: clubs,
               cardsPerRow: 1,
               cardHeight: 160,
-              spacing: 15,
+              spacing: 3,
               childAspectRatio: 1 / 1.2,
             ),
             const SizedBox(height: 15),
@@ -110,6 +108,14 @@ class _MyJoinedClubState extends State<MyJoinedClub> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                    onTap: (){
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AppAllClubViewPage(clubs:clubs),
+                        ),
+                      );
+                    }
                   )
                 ],
               ),
