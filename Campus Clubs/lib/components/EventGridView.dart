@@ -9,6 +9,7 @@ class EventGridView extends StatelessWidget {
   final double cardHeight;
   final double spacing;
   final int number;
+  final bool isInsideScroll;
 
   const EventGridView({
     super.key,
@@ -16,7 +17,8 @@ class EventGridView extends StatelessWidget {
     required this.cardsPerRow,
     required this.cardHeight,
     required this.spacing,
-    required this.number
+    required this.number,
+    this.isInsideScroll = false,
   });
 
   @override
@@ -26,9 +28,9 @@ class EventGridView extends StatelessWidget {
     final childAspectRatio = cardWidth / cardHeight;
 
     return GridView.builder(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      padding: EdgeInsets.only(left: spacing,right: spacing,bottom: spacing),
+      shrinkWrap: isInsideScroll, // ✅ only true when used inside a scroll view
+      physics: isInsideScroll ? NeverScrollableScrollPhysics() : null, // ✅ allow scroll when full page
+      padding: EdgeInsets.only(left: spacing, right: spacing, bottom: spacing),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: cardsPerRow,
         mainAxisSpacing: spacing,
@@ -48,11 +50,11 @@ class EventGridView extends StatelessWidget {
                 builder: (context) => AppEventDetailPage(event: events[index]),
               ),
             );
-
           },
         );
       },
     );
+
   }
 }
 

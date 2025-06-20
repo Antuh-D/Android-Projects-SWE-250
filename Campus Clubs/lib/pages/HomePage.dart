@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                       ? Image.network(
                     baseUrl,
                     width: 150,
-                    height: 100,
+                    height: 120,
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) =>
                         Image.asset(AppURL.email_logo, width: 100, height: 100),
@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: 12),
               Center(child: Text("Welcome, ${user.name} To Explore more", style: TextStyle(fontSize: 17))),
             ],
-            SizedBox(height: 20),
+            SizedBox(height: 35),
 
             Padding(
                 padding: EdgeInsets.only(left: 13),
@@ -95,12 +95,18 @@ class _HomePageState extends State<HomePage> {
               Center(child: Text("No upcoming events found."))
             else
               EventGridView(
-                events: upcomingEvents,
+                events: upcomingEvents.take(2).toList(), // show only 2 events
                 cardsPerRow: 1,
                 cardHeight: 160,
-                number: 3,
+                number: upcomingEvents.length < 2 ? upcomingEvents.length : 2,
                 spacing: 8,
+                isInsideScroll: true,
               ),
+            TextButton(
+              onPressed: () => Navigator.pushNamed(context, AppRoutes.upcomingEventsPage),
+              child: Text("See All"),
+            ),
+
 
             SizedBox(height: 20),
             Padding(
@@ -112,12 +118,18 @@ class _HomePageState extends State<HomePage> {
               Center(child: Text("No closed events found."))
             else
               EventGridView(
-                events: closedEvents,
+                events: closedEvents.take(2).toList(), // show only 2 events
                 cardsPerRow: 1,
                 cardHeight: 160,
-                number: 3,
+                number: closedEvents.length < 2 ? closedEvents.length : 2,
                 spacing: 8,
+                isInsideScroll: true,
               ),
+            TextButton(
+              onPressed: () => Navigator.pushNamed(context, AppRoutes.closedEventsPage),
+              child: Text("See All"),
+            ),
+
           ],
         ),
       ),

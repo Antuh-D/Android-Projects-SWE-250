@@ -20,7 +20,7 @@
       "time": "07:00",
       "location": "Central Park",
       "description": "Capture the morning light and learn street photography tips.",
-      "image": "assets/png/techenthusiastT.png"
+      "image": "assets/png/photographyT.jpg"
     },
     {
       "id": "3",
@@ -31,7 +31,7 @@
       "time": "18:30",
       "location": "Innovation Hub",
       "description": "Students present startup ideas to a panel of investors.",
-      "image": "assets/png/techenthusiastT.png"
+      "image": "assets/png/enterpreneurshipT.png"
     },
     {
       "id": "4",
@@ -42,7 +42,7 @@
       "time": "19:00",
       "location": "Cafe Lounge",
       "description": "An open mic evening of poetic expression and creativity.",
-      "image": "assets/png/techenthusiastT.png"
+      "image": "assets/png/bookT.png"
     },
     {
       "id": "5",
@@ -53,7 +53,7 @@
       "time": "14:00",
       "location": "Lab 3B",
       "description": "Students showcase robots built during the semester.",
-      "image": "assets/png/techenthusiastT.png"
+      "image": "assets/png/roboticsT.png"
     },
     {
       "id": "6",
@@ -75,7 +75,7 @@
       "time": "10:00",
       "location": "Room 101",
       "description": "Annual inter-club chess tournament.",
-      "image": "assets/png/techenthusiastT.png"
+      "image": "assets/png/chessT.png"
     },
     {
       "id": "8",
@@ -132,7 +132,7 @@
       "time": "10:00",
       "location": "Gallery Room",
       "description": "Showcasing student art projects from the past semester.",
-      "image": "assets/png/gameT.png"
+      "image": "assets/png/fitT.png"
     },
     {
       "id": "13",
@@ -143,7 +143,7 @@
       "time": "17:00",
       "location": "Library Room 2",
       "description": "Discussion and readings from emerging writers.",
-      "image": "assets/png/gameT.png"
+      "image": "assets/png/bookT.png"
     },
     {
       "id": "14",
@@ -176,7 +176,7 @@
       "time": "11:00",
       "location": "Room 102",
       "description": "Summer edition of the chess championship.",
-      "image": "assets/png/gameT.png"
+      "image": "assets/png/chessT.png"
     },
     {
       "id": "17",
@@ -187,7 +187,7 @@
       "time": "13:00",
       "location": "Lab 3B",
       "description": "Competitive robotics challenge for advanced students.",
-      "image": "assets/png/gameT.png"
+      "image": "assets/png/roboticsT.png"
     },
     {
       "id": "18",
