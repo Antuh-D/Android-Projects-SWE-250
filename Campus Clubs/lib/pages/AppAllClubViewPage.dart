@@ -17,12 +17,14 @@ class AppAllClubViewPage extends StatelessWidget {
         Headding: "SUST Clubs",
         backpage: true,
       ),
-      body:Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            ClubGridViewSmall(cardData: clubs)
-          ],
+      body:SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            children: [
+              ClubGridViewSmall(cardData: clubs,number: clubs.length,)
+            ],
+          ),
         ),
       ),
     );

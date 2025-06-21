@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:campusclubs/components/ClubGridViewSmall.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -121,14 +122,7 @@ class _MyJoinedClubState extends State<MyJoinedClub> {
               ),
             ),
             const SizedBox(height: 8),
-            AppGridViewSmall(
-              cardData: suggestedClubs,
-              cardsPerRow: 2,
-              cardHeight: 250,
-              cardWidth: 100,
-              spacing: 5,
-              childAspectRatio: 1 / 1.2,
-            ),
+            ClubGridViewSmall(cardData:clubs, number: 4,)
           ],
         ),
       ),

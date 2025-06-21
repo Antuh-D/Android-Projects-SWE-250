@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const connectDB = require('./config/db');
 const Routes = require('./routes/user.router');
 const clubRoutes = require('./routes/club.router')
+const approvalRoutes = require('./routes/approval.router')
 const cors = require('cors');
 
 const app = express();
@@ -23,6 +24,9 @@ app.use('/api', Routes);
 
 //Club Routes
 app.use('/api', clubRoutes);
+
+//approval routes
+app.use('/api' ,approvalRoutes );
 
 // Start the server
 const PORT = process.env.PORT || 3000;

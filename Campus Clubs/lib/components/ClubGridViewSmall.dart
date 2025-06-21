@@ -10,6 +10,7 @@ class ClubGridViewSmall extends StatelessWidget {
   final double cardWidth;
   final double spacing;
   final double childAspectRatio;
+  final int number;
 
   const ClubGridViewSmall({
     Key? key,
@@ -18,7 +19,7 @@ class ClubGridViewSmall extends StatelessWidget {
     this.cardHeight = 250,
     this.cardWidth = 150,
     this.spacing = 8,
-    this.childAspectRatio = 0.75,
+    this.childAspectRatio = 0.75, required this.number,
   }) : super(key: key);
 
   @override
@@ -30,7 +31,7 @@ class ClubGridViewSmall extends StatelessWidget {
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: cardData.length,
+      itemCount: number,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: cardsPerRow,
         crossAxisSpacing: spacing,
@@ -41,7 +42,7 @@ class ClubGridViewSmall extends StatelessWidget {
         final club = cardData[index];
         return GestureDetector(
           onTap: () {
-            Navigator.pushReplacement(
+            Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => AppClubViewPage(club: club),

@@ -135,7 +135,7 @@ class _AppCreateClubPageState extends State<AppCreateClubPage> {
               padding: EdgeInsets.all(16),
               child: ElevatedButton(
                 onPressed: () async {
-                  if (category == null || category!.isEmpty) {
+                  if (category == null || category!.isEmpty ) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Please select a category')),
                     );
