@@ -1,3 +1,4 @@
+import 'package:campusclubs/pages/AppClubApprovalAdminPage.dart';
 import 'package:flutter/material.dart';
 import 'package:campusclubs/pages/AppClubApprovalPage.dart';
 import 'package:campusclubs/pages/AppClubViewPage.dart';
@@ -28,6 +29,8 @@ class AppRoutes {
     clubApproval: (context) => AppClubApprovalPage(),
     profileedit: (context) => AppProfileEditPage(),
     createClub: (context) => AppCreateClubPage(),
+    adminapproval: (context) => AppClubApprovalAdminPage(),
+
 
     // Updated routes for events pages - no arguments needed
     upcomingEventsPage: (context) => UpcomingEventsPage(),
@@ -46,6 +49,7 @@ class AppRoutes {
   static const clubApproval = '/apply';
   static const profileedit = '/infoEdit';
   static const createClub = '/createclub';
+  static const adminapproval = '/approval';
   static const upcomingEventsPage = '/upcoming-events';
   static const closedEventsPage = '/closed-events';
 }

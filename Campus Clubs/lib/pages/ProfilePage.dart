@@ -318,7 +318,9 @@ class _ProfilePageState extends State<ProfilePage> {
             //setting
             AppContainer(
               child: AppTextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed(AppRoutes.adminapproval);
+                },
                 child: Padding(
                   padding: EdgeInsets.only(left: 6),
                   child: Row(

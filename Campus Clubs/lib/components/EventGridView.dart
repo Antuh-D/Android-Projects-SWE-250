@@ -28,8 +28,8 @@ class EventGridView extends StatelessWidget {
     final childAspectRatio = cardWidth / cardHeight;
 
     return GridView.builder(
-      shrinkWrap: isInsideScroll, // ✅ only true when used inside a scroll view
-      physics: isInsideScroll ? NeverScrollableScrollPhysics() : null, // ✅ allow scroll when full page
+      shrinkWrap: isInsideScroll,
+      physics: isInsideScroll ? NeverScrollableScrollPhysics() : null,
       padding: EdgeInsets.only(left: spacing, right: spacing, bottom: spacing),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: cardsPerRow,

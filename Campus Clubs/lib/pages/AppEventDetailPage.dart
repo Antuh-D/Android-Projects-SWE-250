@@ -11,7 +11,7 @@ class AppEventDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final interestProvider = Provider.of<InterestProvider>(context);
-    final isInterested = interestProvider.isInterested(event['id'].toString()); // Use unique ID or title
+    final isInterested = interestProvider.isInterested(event['id'].toString());
 
     return Scaffold(
       appBar: MyAppBar(
