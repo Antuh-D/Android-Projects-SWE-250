@@ -69,10 +69,36 @@ class _AppClubApprovalPageState extends State<AppClubApprovalPage> {
               padding: EdgeInsets.symmetric(horizontal: 16,vertical: 20),
               child: AppTextField(hint: "Club Name", controller: clubname ),
             ),
-
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16,vertical: 20),
-              child: AppTextField(hint: "Contact No", controller: contract),
+              padding: EdgeInsets.symmetric(horizontal: 16,vertical: 16),
+              child: DropdownButtonFormField(
+                items: catagorylist
+                    .map((c) => DropdownMenuItem(
+                    value: c,
+                    child: Text(c,))).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    category = value;
+                  });
+                },
+                decoration: InputDecoration(labelText: "Club Category",
+                  labelStyle: TextStyle(color: Colors.black),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                    borderSide: BorderSide(
+                      color: Colors.black38,
+                      width: 2.0,
+                    ),
+                  ),
+                  filled: true,
+                  fillColor:Colors.white.withOpacity(0.9),
+
+                ),
+                dropdownColor: Colors.white,
+              ),
             ),
 
             Padding(
@@ -104,41 +130,14 @@ class _AppClubApprovalPageState extends State<AppClubApprovalPage> {
                 ),
               ),
             ),
+
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16,vertical: 16),
-              child: DropdownButtonFormField(
-                items: catagorylist
-                    .map((c) => DropdownMenuItem(
-                    value: c,
-                    child: Text(c,))).toList(),
-                    onChanged: (value) {
-                      setState(() {
-                         category = value;
-                      });
-                     },
-                  decoration: InputDecoration(labelText: "Club Category",
-                  labelStyle: TextStyle(color: Colors.black),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: BorderSide(
-                      color: Colors.black38,
-                      width: 2.0,
-                    ),
-                  ),
-                  filled: true,
-                  fillColor:Colors.white.withOpacity(0.9),
-
-                ),
-                dropdownColor: Colors.white,
-              ),
+              child: AppTextField(hint: "President Name", controller: president),
             ),
-
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16,vertical: 20),
-              child: AppTextField(hint: "Club President", controller: president),
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: AppTextField(hint: "President Email", controller: contract),
             ),
 
             //submit
@@ -146,10 +145,7 @@ class _AppClubApprovalPageState extends State<AppClubApprovalPage> {
               padding: EdgeInsets.all(16),
               child: ElevatedButton(
                 onPressed: () async {
-                  final bool x = await submission();
-                  if (x) {
-                    Navigator.of(context).pushReplacementNamed(AppRoutes.profile);
-                  }
+                  fetchUserByEmail();
                 },
                 child: Text("Submit",style: AppTexts.button,),
                 style: ElevatedButton.styleFrom(
@@ -161,6 +157,29 @@ class _AppClubApprovalPageState extends State<AppClubApprovalPage> {
         ),
       ),
     );
+  }
+
+  Future<void>fetchUserByEmail() async {
+    final url = Uri.parse("${dotenv.env['API_URL']}/api/user/$contract");
+
+    try {
+      final response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        final bool x = await submission();
+        if (x) {
+          Navigator.of(context).pushReplacementNamed(AppRoutes.profile);
+        }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('The President Should Be Register For Creating Club')),
+        );
+        print("President Not App User: ${response.statusCode}");
+        throw Exception('The President Should Be Register For Creating Club');
+      }
+    } catch (error) {
+      print("Error fetching user: $error");
+    }
   }
 
   Future<bool> submission() async {

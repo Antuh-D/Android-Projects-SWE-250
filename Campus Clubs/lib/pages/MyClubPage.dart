@@ -8,7 +8,6 @@ import 'package:campusclubs/config/AppRoutes.dart';
 import 'package:campusclubs/config/AppString.dart';
 import '../config/ClubModel.dart';
 import '../config/ClubProvider.dart';
-import '../components/AppGridViewSmall.dart';
 import '../components/ClubGridView.dart';
 import 'AppAllClubViewPage.dart';
 
@@ -110,7 +109,7 @@ class _MyJoinedClubState extends State<MyJoinedClub> {
                       ),
                     ),
                     onTap: (){
-                      Navigator.pushReplacement(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => AppAllClubViewPage(clubs:clubs),

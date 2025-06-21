@@ -77,6 +77,7 @@ class _AppClubApprovalAdminPageState extends State<AppClubApprovalAdminPage> {
                   Text("Club: ${item['clubname']}", style: TextStyle(fontWeight: FontWeight.bold)),
                   Text("Category: ${item['category']}"),
                   Text("President: ${item['president']}"),
+                  Text("Contact No: ${item['contract']}"),
                   SizedBox(height: 8),
                   Text("Application:\n${item['applicationText']}"),
                   SizedBox(height: 12),
