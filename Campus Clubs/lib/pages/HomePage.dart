@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
               Center(child: Text("No upcoming events found."))
             else
               EventGridView(
-                events: upcomingEvents.take(2).toList(), // show only 2 events
+                events: upcomingEvents.take(2).toList(),
                 cardsPerRow: 1,
                 cardHeight: 160,
                 number: upcomingEvents.length < 2 ? upcomingEvents.length : 2,
