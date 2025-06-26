@@ -160,7 +160,15 @@ class _AppClubApprovalPageState extends State<AppClubApprovalPage> {
   }
 
   Future<void>fetchUserByEmail() async {
-    final url = Uri.parse("${dotenv.env['API_URL']}/api/user/$contract");
+    final email = contract.text.trim();
+
+    if (!email.contains('@') || !email.contains('.')) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Enter a valid email address')),
+      );
+      return;
+    }
+    final url = Uri.parse("${dotenv.env['API_URL']}/api/user/$email");
 
     try {
       final response = await http.get(url);

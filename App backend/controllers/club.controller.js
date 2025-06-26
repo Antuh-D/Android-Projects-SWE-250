@@ -21,5 +21,18 @@ const getAllClubs = async (req, res) => {
   }
 };
 
-module.exports = { createClub, getAllClubs };
+const deleteClub = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleted = await clubService.deleteClub(id);
+    if (!deleted) {
+      return res.status(404).json({ message: 'Club not found' });
+    }
+    res.status(200).json({ message: 'Club deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ message: 'Error deleting club', error: err });
+  }
+};
+
+module.exports = { createClub, getAllClubs,deleteClub };
 

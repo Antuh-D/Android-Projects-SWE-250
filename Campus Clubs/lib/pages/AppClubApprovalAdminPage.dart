@@ -20,6 +20,57 @@ class _AppClubApprovalAdminPageState extends State<AppClubApprovalAdminPage> {
     fetchRequests();
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar:MyAppBar(
+        Headding:'Pending Club Approvals' ,
+        backpage: true,
+      ),
+      body: ListView.builder(
+        itemCount: requests.length,
+        itemBuilder: (context, index) {
+          final item = requests[index];
+          if (item==null) return SizedBox(); // Show only pending
+
+          return Card(
+            margin: EdgeInsets.all(12),
+            child: Padding(
+              padding: EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Club: ${item['clubname']}", style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text("Category: ${item['category']}"),
+                  Text("President: ${item['president']}"),
+                  Text("Contact Email: ${item['contract']}"),
+                  SizedBox(height: 8),
+                  Text("Application:\n${item['applicationText']}"),
+                  SizedBox(height: 12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      if (item['status'] == "pending") ...[
+                        TextButton(
+                          onPressed: () => updateStatus(item['_id'], 'rejected'),
+                          child: Text('Reject', style: TextStyle(color: Colors.red)),
+                        ),
+                        ElevatedButton(
+                          onPressed: () => updateStatus(item['_id'], 'approved'),
+                          child: Text('Approve'),
+                        ),
+                      ],
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
   Future<void> fetchRequests() async {
     final url = Uri.parse('${dotenv.env['API_URL']}/api/approval');
     try {
@@ -54,54 +105,4 @@ class _AppClubApprovalAdminPageState extends State<AppClubApprovalAdminPage> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar:MyAppBar(
-        Headding:'Pending Club Approvals' ,
-        backpage: true,
-      ),
-      body: ListView.builder(
-        itemCount: requests.length,
-        itemBuilder: (context, index) {
-          final item = requests[index];
-          if (item==null) return SizedBox(); // Show only pending
-
-          return Card(
-            margin: EdgeInsets.all(12),
-            child: Padding(
-              padding: EdgeInsets.all(12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Club: ${item['clubname']}", style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text("Category: ${item['category']}"),
-                  Text("President: ${item['president']}"),
-                  Text("Contact No: ${item['contract']}"),
-                  SizedBox(height: 8),
-                  Text("Application:\n${item['applicationText']}"),
-                  SizedBox(height: 12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      if (item['status'] == "pending") ...[
-                        TextButton(
-                          onPressed: () => updateStatus(item['_id'], 'rejected'),
-                          child: Text('Reject', style: TextStyle(color: Colors.red)),
-                        ),
-                        ElevatedButton(
-                          onPressed: () => updateStatus(item['_id'], 'approved'),
-                          child: Text('Approve'),
-                        ),
-                      ],
-                    ],
-                  )
-                ],
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
 }

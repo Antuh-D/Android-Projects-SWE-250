@@ -241,7 +241,11 @@ class _ProfilePageState extends State<ProfilePage> {
             AppContainer(
               child: AppTextButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed(AppRoutes.clubApproval);
+                  if(user!.role=='varsity'){
+                    Navigator.of(context).pushNamed(AppRoutes.adminapproval);
+                  }else{
+                    Navigator.of(context).pushNamed(AppRoutes.clubApproval);
+                  }
                 },
                 child: Padding(
                   padding: EdgeInsets.only(left: 6),
@@ -257,10 +261,15 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
 
             //crete club
+            //if( user!= null && user.role!='varsity')
             AppContainer(
               child: AppTextButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed(AppRoutes.createClub);
+                  if(user!.role=='varsity'){
+                    Navigator.of(context).pushNamed(AppRoutes.adminmonitor);
+                  }else{
+                    Navigator.of(context).pushNamed(AppRoutes.createClub);
+                  }
                 },
                 child: Padding(
                   padding: EdgeInsets.only(left: 6),
@@ -268,7 +277,12 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: [
                       SvgPicture.asset(AppURL.create_club_svg,
                           height: 25, width: 25, color: AppColors.icon3),
-                      Text("  Create Your Club", style: AppTexts.button2),
+                      Text(
+                          user!.role == 'varsity'
+                              ? "  Club Monitoring"
+                              : "  Create Your Club",
+                          style: AppTexts.button2
+                      ),
                     ],
                   ),
                 ),
@@ -309,25 +323,6 @@ class _ProfilePageState extends State<ProfilePage> {
                           width: 20,
                           color: Colors.redAccent),
                       Text("   Edit Personal Info", style: AppTexts.button2),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-
-            //setting
-            AppContainer(
-              child: AppTextButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed(AppRoutes.adminapproval);
-                },
-                child: Padding(
-                  padding: EdgeInsets.only(left: 6),
-                  child: Row(
-                    children: [
-                      Icon(Icons.settings_sharp,
-                          size: 25, color: AppColors.icon2),
-                      Text("  Setting", style: AppTexts.button2),
                     ],
                   ),
                 ),

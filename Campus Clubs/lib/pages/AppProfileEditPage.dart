@@ -109,7 +109,7 @@ class _AppProfileEditPageState extends State<AppProfileEditPage> {
     }
 
     final Map<String, dynamic> updateFields = {
-      "_id": user.id, // Ensure _id is included
+      "_id": user.id,
     };
 
     if (username.text.trim() != user.name) {

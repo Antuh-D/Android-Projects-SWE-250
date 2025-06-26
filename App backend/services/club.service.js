@@ -27,4 +27,9 @@ const getAllClubs = async () => {
   return await Club.find();
 };
 
-module.exports = { createClub, getAllClubs };
+const deleteClub = async (id) => {
+  const deletedClub = await Club.findByIdAndDelete(id);
+  return deletedClub;
+};
+
+module.exports = { createClub, getAllClubs,deleteClub};
