@@ -5,11 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1d1f2aa-5608-454c-b201-52d77f423fe7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App backend/controllers/club.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/App backend/controllers/club.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App backend/routes/club.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/App backend/routes/club.router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App backend/services/club.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/App backend/services/club.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Campus Clubs/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Campus Clubs/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Campus Clubs/android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Campus Clubs/android/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Campus Clubs/lib/config/AppRoutes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Campus Clubs/lib/config/AppRoutes.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Campus Clubs/lib/pages/AppClubApprovalAdminPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Campus Clubs/lib/pages/AppClubApprovalAdminPage.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Campus Clubs/lib/pages/AppClubApprovalPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Campus Clubs/lib/pages/AppClubApprovalPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Campus Clubs/lib/pages/MyClubPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Campus Clubs/lib/pages/MyClubPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Campus Clubs/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Campus Clubs/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Campus Clubs/lib/pages/AppProfileEditPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Campus Clubs/lib/pages/AppProfileEditPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Campus Clubs/lib/pages/ProfilePage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Campus Clubs/lib/pages/ProfilePage.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
