@@ -50,10 +50,6 @@ class _HomePageState extends State<HomePage> {
     final userProvider = Provider.of<UserProvider>(context);
     final user = userProvider.user;
 
-    final String? profilePicture = user?.profilePicture;
-    final String baseUrl = (profilePicture != null && profilePicture.isNotEmpty)
-        ? dotenv.env['API_URL']! + profilePicture
-        : '';
 
     return Scaffold(
       appBar: MyAppBar(
@@ -69,14 +65,12 @@ class _HomePageState extends State<HomePage> {
             if (user != null) ...[
               Center(
                 child: ClipOval(
-                  child: (baseUrl.isNotEmpty)
-                      ? Image.network(
-                    baseUrl,
-                    width: 150,
+                  child: user.profilePicture!=null
+                      ? Image.memory(
+                    base64Decode(user.profilePicture),
+                    width: 120,
                     height: 120,
                     fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) =>
-                        Image.asset(AppURL.email_logo, width: 100, height: 100),
                   )
                       : Image.asset(AppURL.email_logo, width: 100, height: 100),
                 ),
