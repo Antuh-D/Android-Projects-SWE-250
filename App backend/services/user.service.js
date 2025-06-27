@@ -92,6 +92,27 @@ const findUserById = async (userId) => {
 return await User.findById(userId);
 };
 
+//update user image
+const updateImageService = async (userId, profilePicture, coverPicture) => {
+  if (!profilePicture && !coverPicture) {
+    throw new Error("No image provided");
+  }
+
+  const updateFields = {};
+  if (profilePicture) updateFields.profilePicture = profilePicture;
+  if (coverPicture) updateFields.coverPicture = coverPicture;
+
+  const updatedUser = await User.findByIdAndUpdate(userId, updateFields, { new: true });
+  if (!updatedUser) throw new Error("User not found");
+
+  return {
+    message: "Image(s) updated successfully",
+    user: updatedUser,
+  };
+};
+
+
+
 
 
 module.exports = {
@@ -100,4 +121,5 @@ module.exports = {
   findUserByEmail,
   updateUserProfile,
   findUserById,
+  updateImageService,
 };

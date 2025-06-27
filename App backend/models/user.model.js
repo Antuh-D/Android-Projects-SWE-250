@@ -31,7 +31,7 @@ const userSchema = new Schema({
     default: 'user',
   },
   profilePicture: {
-    type: String,
+    type: String,// base64
     default: "/assets/me.jpg", // Local default image path
   },
   department:{
@@ -41,7 +41,11 @@ const userSchema = new Schema({
   university:{
   type:String,
   default:"SUST",
-  }
+  },
+  coverPicture: {
+      type: String,// base64
+      default: "/assets/me.jpg", // Local default image path
+    },
 });
 
 const UserModel = db.model('User', userSchema);

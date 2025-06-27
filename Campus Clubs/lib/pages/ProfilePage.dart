@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:io';
+import 'package:http/http.dart' as http;
 import 'package:campusclubs/components/MyAppBar.dart';
 import 'package:campusclubs/config/AppRoutes.dart';
 import 'package:campusclubs/config/AppString.dart';
@@ -7,6 +9,7 @@ import 'package:campusclubs/styles/AppColors.dart';
 import 'package:campusclubs/styles/AppTexts.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:typed_data';
@@ -26,35 +29,6 @@ class _ProfilePageState extends State<ProfilePage> {
   Uint8List? coverImageBytes;
   File? coverImageFile;
   final ImagePicker picker = ImagePicker();
-
-  Future<void> pickImage(String type) async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
-    if (pickedFile != null) {
-      if (kIsWeb) {
-        final bytes = await pickedFile.readAsBytes();
-        setState(() {
-          if (type == 'profile') {
-            imageBytes = bytes;
-            imageFile = null;
-          } else if (type == 'cover') {
-            coverImageBytes = bytes;
-            coverImageFile = null;
-          }
-        });
-      } else {
-        setState(() {
-          if (type == 'profile') {
-            imageFile = File(pickedFile.path);
-            imageBytes = null;
-          } else if (type == 'cover') {
-            coverImageFile = File(pickedFile.path);
-            coverImageBytes = null;
-          }
-        });
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,15 +54,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   width: screenWidth,
                   height: 300,
                   decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: coverImageBytes != null
-                          ? MemoryImage(coverImageBytes!)
-                          : coverImageFile != null
-                          ? FileImage(coverImageFile!)
-                          : AssetImage('assets/png/antu.jpg')
-                      as ImageProvider,
-                      fit: BoxFit.cover,
-                    ),
+                    image: user!.coverPicture != null
+                        ? DecorationImage(
+                          image: MemoryImage(base64Decode(user.coverPicture)),
+                          fit: BoxFit.cover,
+                          )
+                        : DecorationImage(image: AssetImage('assets/png/antu.jpg')),
                   ),
                 ),
                 //cover pic
@@ -98,7 +69,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: IconButton(
                     icon: Icon(Icons.camera_alt, color: Colors.black, size: 30),
                     onPressed: () {
-                      pickImage('cover');
+                      // pickImage('profile');
+                      pickFile('cover');
                     },
                   ),
                 ),
@@ -120,9 +92,13 @@ class _ProfilePageState extends State<ProfilePage> {
                           backgroundImage: imageBytes != null
                               ? MemoryImage(imageBytes!)
                               : imageFile != null
-                              ? FileImage(imageFile!) as ImageProvider
+                              ? FileImage(imageFile!)
+                              : (user.profilePicture != null && user.profilePicture != '')
+                              ? MemoryImage(base64Decode(user.profilePicture))
                               : null,
-                          child: (imageBytes == null && imageFile == null)
+                          child: (imageBytes == null &&
+                              imageFile == null &&
+                              (user.profilePicture == null || user.profilePicture == ''))
                               ? SvgPicture.asset(
                             'assets/svgicons/user.svg',
                             height: 60,
@@ -136,7 +112,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: IconButton(
                           icon: Icon(Icons.camera_alt, size: 20),
                           onPressed: () {
-                            pickImage('profile');
+                           // pickImage('profile');
+                            pickFile('profile');
                           },
                         ),
                       ),
@@ -332,5 +309,87 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
     );
+  }
+
+
+  Future<void> pickFile(String type) async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if(type=='cover'){
+      if (pickedFile != null) {
+        if (kIsWeb) {
+          final bytes = await pickedFile.readAsBytes();
+          setState(() {
+            coverImageBytes = bytes;
+            coverImageFile = null;
+          });
+        } else {
+          setState(() {
+            coverImageFile = File(pickedFile.path);
+            coverImageBytes = null;
+          });
+        }
+      }
+    }
+    else{
+      if (pickedFile != null) {
+        if (kIsWeb) {
+          final bytes = await pickedFile.readAsBytes();
+          setState(() {
+            imageBytes = bytes;
+            imageFile = null;
+          });
+        } else {
+          setState(() {
+            imageFile = File(pickedFile.path);
+            imageBytes = null;
+          });
+        }
+      }
+    }
+    uploadImages();
+  }
+
+  String? convertToBase64(Uint8List? bytes, File? file) {
+    if (bytes != null) {
+      return base64Encode(bytes);
+    } else if (file != null) {
+      return base64Encode(file.readAsBytesSync());
+    }
+    return null;
+  }
+
+  Future<void> uploadImages() async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final user = userProvider.user;
+    final token = userProvider.token;
+
+    String? base64Profile = convertToBase64(imageBytes, imageFile);
+    String? base64Cover = convertToBase64(coverImageBytes, coverImageFile);
+
+    try {
+      final response = await http.put(
+        Uri.parse('${dotenv.env['API_URL']}/api/updateimage'),
+        headers:{
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $token",
+      },
+        body: jsonEncode({
+          '_id': user?.id,
+          'profilePicture': base64Profile,
+          'coverPicture': base64Cover,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        print('Images updated');
+        final updatedUser = jsonDecode(response.body)['user'];
+        userProvider.updateUserFromJson(updatedUser);
+        setState(() {});
+      } else {
+        print('Upload failed: ${response.body}');
+      }
+    } catch (e) {
+      print('Exception: $e');
+    }
   }
 }

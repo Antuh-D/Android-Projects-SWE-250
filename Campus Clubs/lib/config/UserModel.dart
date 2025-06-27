@@ -7,6 +7,7 @@ class UserModel{
   final String department;
   final String university;
   final String role;
+  final String coverPicture;
 
 
   UserModel({
@@ -17,7 +18,8 @@ class UserModel{
     required this.profilePicture,
     required this.role,
     required this.department,
-    required this.university
+    required this.university,
+    required this.coverPicture,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -29,6 +31,7 @@ class UserModel{
       profilePicture: json['profilePicture'] ?? '',
       department: json['department'] ?? '',
       university: json['university'] ?? '',
+      coverPicture : json['coverPicture']??'',
       role: json['role'] ?? '',
     );
   }
@@ -40,6 +43,7 @@ class UserModel{
       'email': email,
       'registration': registation,
       'profilePicture': profilePicture,
+      'coverPicture':coverPicture,
       'department': department,
       'university': university,
       'role': role,

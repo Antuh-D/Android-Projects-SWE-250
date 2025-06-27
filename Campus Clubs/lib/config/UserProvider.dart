@@ -27,6 +27,8 @@ class UserProvider with ChangeNotifier {
           email: data['email'],
           registation: data['registration'],
           profilePicture: data['profilePicture'],
+          coverPicture: data['coverPicture'],
+
           department: data['department'],
           university: data['university'],
           role: data['role'],

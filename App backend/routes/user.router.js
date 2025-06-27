@@ -6,6 +6,7 @@ const {
       loginUser,
       findUserByEmail,
       updateUserProfile,
+      updatePictureController
     } = require('../controllers/user.controller');  
 
 
@@ -20,6 +21,13 @@ router.put('/updateprofile',authenticateToken, upload.single("profilePicture"), 
 
 //search user
 router.get('/user/:email', findUserByEmail);
+
+//update user image
+router.put(
+  '/updateimage',
+  authenticateToken,
+  updatePictureController
+);
 
 
 module.exports = router;

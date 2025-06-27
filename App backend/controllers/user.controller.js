@@ -1,6 +1,8 @@
 const authService = require('../services/user.service');
+const { updateImageService } = require('../services/user.service');
 const user = require('../models/user.model');
 const bcrypt = require('bcrypt');
+
 
 // Register user
 const registerUser = async (req, res) => {
@@ -46,7 +48,7 @@ const findUserByEmail = async (req, res) => {
 
 
 
-//Update user profile
+//Update user profile info
 const updateUserProfile = async (req, res) => {
   try {
     const {
@@ -100,6 +102,25 @@ const updateUserProfile = async (req, res) => {
   }
 };
 
+//update image
+const updatePictureController = async (req, res) => {
+  try {
+    const userId = req.body._id;
+    console.log("Updating user ID:", userId);
+
+    const { profilePicture, coverPicture } = req.body;
+
+    const result = await updateImageService(userId, profilePicture, coverPicture);
+
+    res.status(200).json({
+      message: result.message,
+      user: result.user,
+    });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 
 
 module.exports = {
@@ -107,4 +128,5 @@ module.exports = {
   loginUser,
   findUserByEmail,
   updateUserProfile,
+  updatePictureController,
 };
