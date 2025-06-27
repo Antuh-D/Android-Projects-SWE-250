@@ -72,8 +72,8 @@ class _HomePageState extends State<HomePage> {
                   child: (baseUrl.isNotEmpty)
                       ? Image.network(
                     baseUrl,
-                    width: 150,
-                    height: 120,
+                    width: 160,
+                    height: 160,
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) =>
                         Image.asset(AppURL.email_logo, width: 100, height: 100),
@@ -81,11 +81,11 @@ class _HomePageState extends State<HomePage> {
                       : Image.asset(AppURL.email_logo, width: 100, height: 100),
                 ),
               ),
-              SizedBox(height: 12),
+              SizedBox(height: 5),
               Center(child: Text("Welcome, ${user.name} To Explore more", style: TextStyle(fontSize: 17))),
             ],
-            SizedBox(height: 35),
-
+            Divider(thickness: 1,),
+            SizedBox(height: 5),
             Padding(
                 padding: EdgeInsets.only(left: 13),
                 child: Text("Upcoming Events", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold))),
@@ -95,11 +95,11 @@ class _HomePageState extends State<HomePage> {
               Center(child: Text("No upcoming events found."))
             else
               EventGridView(
-                events: upcomingEvents.take(2).toList(),
+                events: upcomingEvents.take(3).toList(),
                 cardsPerRow: 1,
                 cardHeight: 160,
-                number: upcomingEvents.length < 2 ? upcomingEvents.length : 2,
-                spacing: 8,
+                number: upcomingEvents.length < 3 ? upcomingEvents.length : 3,
+                spacing: 3,
                 isInsideScroll: true,
               ),
             TextButton(
@@ -108,7 +108,7 @@ class _HomePageState extends State<HomePage> {
             ),
 
 
-            SizedBox(height: 20),
+            //SizedBox(height: 10),
             Padding(
               padding: EdgeInsets.only(left: 13),
                 child: Text("Closed Events", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold))),
@@ -120,9 +120,9 @@ class _HomePageState extends State<HomePage> {
               EventGridView(
                 events: closedEvents.take(2).toList(), // show only 2 events
                 cardsPerRow: 1,
-                cardHeight: 160,
+                cardHeight: 150,
                 number: closedEvents.length < 2 ? closedEvents.length : 2,
-                spacing: 8,
+                spacing: 3,
                 isInsideScroll: true,
               ),
             TextButton(
