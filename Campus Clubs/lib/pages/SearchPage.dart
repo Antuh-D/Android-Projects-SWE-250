@@ -1,6 +1,14 @@
+import 'package:campusclubs/components/AppClubSearchShow.dart';
+import 'package:campusclubs/styles/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+
+import '../config/ClubModel.dart';
+import '../config/ClubProvider.dart';
+import 'AppClubViewPage.dart';
+import 'AppEventDetailPage.dart';
 
 
 class SearchPage extends StatefulWidget {
@@ -27,16 +35,44 @@ class _AppSearchPageState extends State<SearchPage> {
     final Map<String, dynamic> jsonData = json.decode(response);
 
     if (jsonData.containsKey('upcoming')) {
-      combined.addAll(jsonData['upcoming'].map((e) => {...e, 'type': 'event'}));
+      combined.addAll(jsonData['upcoming'].map((e) => {
+        'type': 'event',
+        'title': e['title'],
+        'category': e['category'],
+        'id': e['id'],
+        'image': e['image'],
+        'eventObject': e, // Store full event object here
+      }));
     }
+
     if (jsonData.containsKey('closed')) {
-      combined.addAll(jsonData['closed'].map((e) => {...e, 'type': 'event'}));
+      combined.addAll(jsonData['closed'].map((e) => {
+        'type': 'event',
+        'title': e['title'],
+        'category': e['category'],
+        'id': e['id'],
+        'image': e['image'],
+        'eventObject': e,
+      }));
     }
+
+    // Load clubs from provider
+    final clubs = Provider.of<ClubProvider>(context, listen: false).clubs;
+    combined.addAll(clubs.map((club) => {
+      'type': 'club',
+      'title': club.name,
+      'category': club.category,
+      'id': club.id,
+      'image': club.image,
+      'followers': club.followers,
+      'clubObject': club,
+    }));
 
     setState(() {
       allData = combined;
     });
   }
+
 
   void handleSearch(String input) {
     setState(() {
@@ -69,6 +105,8 @@ class _AppSearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    final clubProvider = Provider.of<ClubProvider>(context);
+    final clubs = clubProvider.clubs;
     return Scaffold(
       body: Column(
         children: [
@@ -164,16 +202,40 @@ class _AppSearchPageState extends State<SearchPage> {
               child: ListView.builder(
                 itemCount: filteredData.length,
                 itemBuilder: (context, index) {
-                  return Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(15),
-                      child: Container(
-                        width: 170,
-                        child: Text("Iteam"),
+                  final item = filteredData[index];
 
-                      ),
-                    ),
-                  );
+                  if (item['type'] == 'club') {
+                    final ClubModel club = item['clubObject'];
+                    return AppClubSearchShow(
+                      club: item,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                AppClubViewPage(club: club),
+                          ),
+                        );
+                      },
+                    );
+                  }
+                  if (item['type'] == 'event') {
+                    final event = item['eventObject'];
+                    return ListTile(
+                      title: Text(event['title']),
+                      subtitle: Text('${event['date']} at ${event['time']}'),
+                      leading: const CircleAvatar(child: Icon(Icons.event,color: AppColors.accentPink,)),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AppEventDetailPage(event: event),
+                          ),
+                        );
+                      },
+                    );
+                  }
+                  return SizedBox.shrink();
                 },
               ),
             ),
