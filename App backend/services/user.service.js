@@ -111,7 +111,23 @@ const updateImageService = async (userId, profilePicture, coverPicture) => {
   };
 };
 
+const updateUserRoleService = async (userId, role) => {
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    throw new Error('Invalid user ID');
+  }
 
+  const updatedUser = await User.findByIdAndUpdate(
+    userId,
+    { role },
+    { new: true, runValidators: true }
+  );
+
+  if (!updatedUser) {
+    throw new Error('User not found');
+  }
+
+  return updatedUser;
+};
 
 
 
@@ -122,4 +138,5 @@ module.exports = {
   updateUserProfile,
   findUserById,
   updateImageService,
+  updateUserRoleService,
 };

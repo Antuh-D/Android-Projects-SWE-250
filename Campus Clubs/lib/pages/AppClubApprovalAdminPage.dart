@@ -101,7 +101,7 @@ class _AppClubApprovalAdminPageState extends State<AppClubApprovalAdminPage> {
       if (response.statusCode == 200) {
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Status updated ')),
+          SnackBar(content: Text('Approve')),
         );
         fetchRequests();
          return true;
@@ -137,7 +137,7 @@ class _AppClubApprovalAdminPageState extends State<AppClubApprovalAdminPage> {
 
 
   Future<void> updateUserRole(String userId) async {
-    final String URL = "${dotenv.env['API_URL']}/api/updateprofile";
+    final String URL = "${dotenv.env['API_URL']}/api//updaterole";
     final url = Uri.parse(URL);
     try {
       final response = await http.put(

@@ -1,5 +1,5 @@
 const authService = require('../services/user.service');
-const { updateImageService } = require('../services/user.service');
+const { updateImageService,updateUserRoleService } = require('../services/user.service');
 const user = require('../models/user.model');
 const bcrypt = require('bcrypt');
 
@@ -123,7 +123,24 @@ const updatePictureController = async (req, res) => {
   }
 };
 
+const updateUserRole = async (req, res) => {
+  try {
+    const { _id, role } = req.body;
 
+    if (!_id || !role) {
+      return res.status(400).json({ error: 'User ID and role are required' });
+    }
+
+    const updatedUser = await updateUserRoleService(_id, role);
+
+    res.status(200).json({
+      message: 'Role updated successfully',
+      user: updatedUser,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
 module.exports = {
   registerUser,
@@ -131,4 +148,5 @@ module.exports = {
   findUserByEmail,
   updateUserProfile,
   updatePictureController,
+  updateUserRole,
 };
