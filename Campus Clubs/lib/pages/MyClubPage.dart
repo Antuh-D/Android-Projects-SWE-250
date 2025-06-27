@@ -100,28 +100,19 @@ class _MyJoinedClubState extends State<MyJoinedClub> {
                     ),
                   ),
                   const Spacer(),
-                  GestureDetector(
-                    child: const Text(
-                      "View All",
-                      style: TextStyle(
-                        color: Colors.green,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AppAllClubViewPage(clubs:clubs),
-                        ),
-                      );
-                    }
-                  )
                 ],
               ),
             ),
             const SizedBox(height: 8),
-            ClubGridViewSmall(cardData:clubs, number: 4,)
+            ClubGridViewSmall(cardData:clubs, number: 4,),
+            TextButton(onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AppAllClubViewPage(clubs:clubs),
+                ),
+              );
+            }, child: Text("View All",style: TextStyle(color: Colors.grey), ))
           ],
         ),
       ),

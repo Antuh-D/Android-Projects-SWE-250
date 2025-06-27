@@ -1,10 +1,7 @@
 import 'package:campusclubs/components/ClubGridViewSmall.dart';
 import 'package:campusclubs/config/ClubModel.dart';
 import 'package:flutter/material.dart';
-
-import '../components/AppGridViewSmall.dart';
 import '../components/MyAppBar.dart';
-import '../config/AppString.dart';
 
 class AppAllClubViewPage extends StatelessWidget {
   final List<ClubModel> clubs;

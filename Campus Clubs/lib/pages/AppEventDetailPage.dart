@@ -87,7 +87,7 @@ class AppEventDetailPage extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  backgroundColor: isInterested ? Colors.green : Colors.green,
+                  backgroundColor: isInterested ? Colors.pinkAccent : Colors.pinkAccent,
                 ),
               ),
             ),

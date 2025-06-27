@@ -32,9 +32,6 @@ class AppRoutes {
     createClub: (context) => AppCreateClubPage(),
     adminapproval: (context) => AppClubApprovalAdminPage(),
     adminmonitor: (context) => AppClubAdminMonitor(),
-
-
-    // Updated routes for events pages - no arguments needed
     upcomingEventsPage: (context) => UpcomingEventsPage(),
     closedEventsPage: (context) => ClosedEventsPage(),
   };

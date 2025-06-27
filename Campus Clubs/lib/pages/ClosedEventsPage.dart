@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'package:flutter/material.dart'; // Required for widgets
-import 'package:flutter/services.dart'; // Required for loading assets
+import 'package:campusclubs/components/MyAppBar.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../components/EventGridView.dart';
-
 class ClosedEventsPage extends StatefulWidget {
   const ClosedEventsPage({Key? key}) : super(key: key);
 
@@ -40,7 +40,9 @@ class _ClosedEventsPageState extends State<ClosedEventsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('All Closed Events')),
+      appBar: MyAppBar(Headding: "Closed Events",
+        backpage: true,
+      ),
       body: Padding(
         padding: EdgeInsets.all(12),
         child: isLoading
