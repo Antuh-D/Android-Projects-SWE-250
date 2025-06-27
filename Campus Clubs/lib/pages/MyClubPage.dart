@@ -104,7 +104,7 @@ class _MyJoinedClubState extends State<MyJoinedClub> {
               ),
             ),
             const SizedBox(height: 8),
-            ClubGridViewSmall(cardData:clubs, number: 4,),
+            ClubGridViewSmall(cardData:clubs, number: clubs.length,),
             TextButton(onPressed: (){
               Navigator.push(
                 context,

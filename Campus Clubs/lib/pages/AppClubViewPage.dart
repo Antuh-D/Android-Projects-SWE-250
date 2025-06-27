@@ -3,7 +3,6 @@ import 'package:campusclubs/components/MyAppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../components/EventGridView.dart';
 import '../components/HighlightItem.dart';
 import '../config/ClubModel.dart';
 import '../styles/AppColors.dart';
@@ -206,7 +205,7 @@ class _AppClubViewPageState extends State<AppClubViewPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => AppEventDetailPage(event: closedEvents[index]),
+                      builder: (context) => AppEventDetailPage(event: upcomingEvents[index]),
                     ),
                   );
                 }, child:Text("Register")),
