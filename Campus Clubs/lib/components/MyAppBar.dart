@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:campusclubs/styles/AppColors.dart';
 import 'package:campusclubs/styles/AppTexts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 import '../config/AppURL.dart';
+import '../config/UserProvider.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback ?onProfileClick;
@@ -23,34 +27,50 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    final user = userProvider.user;
+
     return AppBar(
       backgroundColor: AppColors.navigator,
       title:Padding(
         padding: EdgeInsets.symmetric(horizontal: 15),
         child: Row(
           children: [
-            onProfileClick!=null
-            ?Container(
-             height: 35,
-             decoration: BoxDecoration(
-               border: Border.all(
-                 color: Colors.black,
-                 width: 2,
-               ),
-               shape: BoxShape.circle,
-             ),
+            onProfileClick != null
+                ? Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: Colors.black,
+                  width: 2,
+                ),
+              ),
+              child: IconButton(
+                onPressed: onProfileClick,
+                padding: EdgeInsets.zero,
+                constraints: BoxConstraints(),
+                icon: user != null && user.profilePicture.isNotEmpty
+                    ? ClipOval(
+                  child: Image.memory(
+                    base64Decode(user.profilePicture),
+                    width: 40,
+                    height: 40,
+                    fit: BoxFit.cover,
+                  ),
+                )
+                    : SvgPicture.asset(
+                  AppURL.user,
+                  height: 30,
+                  width: 30,
+                  color: Colors.black,
+                ),
+              ),
+            )
+                : SizedBox(),
 
-             child: IconButton(onPressed: onProfileClick,
-                 icon: SvgPicture.asset(
-                     AppURL.user,
-                     height: 30,
-                     width: 30,
-                     color: Colors.black
-               )
-             ),
-           ):SizedBox(),
-
-           Spacer(),
+            Spacer(),
 
            Center(
                child: Text(Headding ??'', style: AppTexts.AppHeading,)

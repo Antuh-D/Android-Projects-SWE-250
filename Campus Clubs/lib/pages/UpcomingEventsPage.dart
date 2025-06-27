@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:campusclubs/styles/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -141,7 +142,7 @@ class _UpcomingEventsPageState extends State<UpcomingEventsPage> {
                       ? 'Clear Filter'
                       : isFilterOpen
                       ? 'Close Filters'
-                      : 'Filter (${selectedCategory})'),
+                      : 'Filter (${selectedCategory})' ,style: TextStyle(color: AppColors.accentPink),),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 16, vertical: 10),

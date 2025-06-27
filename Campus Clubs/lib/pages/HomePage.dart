@@ -75,10 +75,11 @@ class _HomePageState extends State<HomePage> {
                       : Image.asset(AppURL.email_logo, width: 100, height: 100),
                 ),
               ),
-              SizedBox(height: 12),
+              SizedBox(height: 5),
               Center(child: Text("Welcome, ${user.name} To Explore more", style: TextStyle(fontSize: 17))),
             ],
-            SizedBox(height: 35),
+            SizedBox(height: 8),
+            Divider(thickness: 1,),
 
             Padding(
                 padding: EdgeInsets.only(left: 13),
@@ -89,20 +90,20 @@ class _HomePageState extends State<HomePage> {
               Center(child: Text("No upcoming events found."))
             else
               EventGridView(
-                events: upcomingEvents.take(2).toList(),
+                events: upcomingEvents.take(3).toList(),
                 cardsPerRow: 1,
                 cardHeight: 160,
-                number: upcomingEvents.length < 2 ? upcomingEvents.length : 2,
-                spacing: 8,
+                number: upcomingEvents.length < 3 ? upcomingEvents.length : 3,
+                spacing: 3,
                 isInsideScroll: true,
               ),
             TextButton(
               onPressed: () => Navigator.pushNamed(context, AppRoutes.upcomingEventsPage),
-              child: Text("See All"),
+              child: Text("See All",style: TextStyle(color: Colors.grey),),
             ),
 
 
-            SizedBox(height: 20),
+            SizedBox(height:3),
             Padding(
               padding: EdgeInsets.only(left: 13),
                 child: Text("Closed Events", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold))),
@@ -116,12 +117,12 @@ class _HomePageState extends State<HomePage> {
                 cardsPerRow: 1,
                 cardHeight: 160,
                 number: closedEvents.length < 2 ? closedEvents.length : 2,
-                spacing: 8,
+                spacing: 3,
                 isInsideScroll: true,
               ),
             TextButton(
               onPressed: () => Navigator.pushNamed(context, AppRoutes.closedEventsPage),
-              child: Text("See All"),
+              child: Text("See All",style: TextStyle(color: Colors.grey),),
             ),
 
           ],
