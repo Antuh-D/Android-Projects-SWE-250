@@ -6,7 +6,8 @@ const {
       loginUser,
       findUserByEmail,
       updateUserProfile,
-      updatePictureController
+      updatePictureController,
+      updateUserRole
     } = require('../controllers/user.controller');  
 
 
@@ -18,7 +19,7 @@ router.post('/login',  loginUser);
 
 //update user info
 router.put('/updateprofile',authenticateToken, upload.single("profilePicture"), updateUserProfile);
-
+router.put('/updaterole', updateUserRole);
 //search user
 router.get('/user/:email', findUserByEmail);
 

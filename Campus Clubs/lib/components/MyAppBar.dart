@@ -69,13 +69,10 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
             )
                 : SizedBox(),
-
             Spacer(),
-
            Center(
                child: Text(Headding ??'', style: AppTexts.AppHeading,)
            ),
-
             Spacer(),
             onSettingsClick!=null
             ?IconButton(onPressed:onSettingsClick , icon: Icon(Icons.settings)):SizedBox(),

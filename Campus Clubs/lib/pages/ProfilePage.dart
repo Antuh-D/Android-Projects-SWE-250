@@ -16,7 +16,9 @@ import 'dart:typed_data';
 import 'package:provider/provider.dart';
 import '../components/AppContainer.dart';
 import '../components/AppTextButton.dart';
+import '../config/ClubProvider.dart';
 import '../config/UserProvider.dart';
+import 'AppAllClubViewPage.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -34,6 +36,10 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final user = userProvider.user;
+
+
+    final clubProvider = Provider.of<ClubProvider>(context);
+    final clubs = clubProvider.clubs;
 
     var screenWidth = MediaQuery.of(context).size.width;
 
@@ -249,7 +255,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   }
                   else{
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Need To Approval For Creating New Club')),
+                      SnackBar(content: Text('Need Approval For Creating New Club'),showCloseIcon: true,),
                     );
                   }
                 },
@@ -275,7 +281,12 @@ class _ProfilePageState extends State<ProfilePage> {
             AppContainer(
               child: AppTextButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed(AppRoutes.myclubs);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AppAllClubViewPage(clubs:clubs),
+                    ),
+                  );
                 },
                 child: Padding(
                   padding: EdgeInsets.only(left: 6),
