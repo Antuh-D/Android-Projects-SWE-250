@@ -31,8 +31,8 @@ const userSchema = new Schema({
     default: 'user',
   },
   profilePicture: {
-    type: String,// base64
-    default: "/assets/me.jpg", // Local default image path
+    type: String,// base64// Local default image path
+    default: "null",
   },
   department:{
   type:String,
@@ -44,7 +44,7 @@ const userSchema = new Schema({
   },
   coverPicture: {
       type: String,// base64
-      default: "/assets/me.jpg", // Local default image path
+      default: "null", // Local default image path
     },
 });
 

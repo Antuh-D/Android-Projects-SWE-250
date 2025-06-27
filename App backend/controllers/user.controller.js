@@ -59,7 +59,8 @@ const updateUserProfile = async (req, res) => {
       department,
       university,
       oldPassword,
-      newPassword
+      newPassword,
+      role
     } = req.body;
 
     if (!userId) {
@@ -74,6 +75,7 @@ const updateUserProfile = async (req, res) => {
     if (registration) updateData.registration = registration;
     if (department) updateData.department = department;
     if (university) updateData.university = university;
+    if(role) updateData.role = role;
 
     // Handle password update
     if (oldPassword && newPassword) {

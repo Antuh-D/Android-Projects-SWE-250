@@ -56,7 +56,12 @@ class _AppClubApprovalAdminPageState extends State<AppClubApprovalAdminPage> {
                           child: Text('Reject', style: TextStyle(color: Colors.red)),
                         ),
                         ElevatedButton(
-                          onPressed: () => updateStatus(item['_id'], 'approved'),
+                          onPressed: () async {
+                            bool isApproved = await updateStatus(item['_id'], 'approved');
+                            if (isApproved) {
+                              await fetchUserByEmail(item['contract']);
+                            }
+                          },
                           child: Text('Approve'),
                         ),
                       ],
@@ -85,8 +90,7 @@ class _AppClubApprovalAdminPageState extends State<AppClubApprovalAdminPage> {
     }
   }
 
-  Future<void> updateStatus(String id, String status) async {
-    print(id);
+  Future<bool> updateStatus(String id, String status) async {
     final url = Uri.parse('${dotenv.env['API_URL']}/api/approval/$id');
     try {
       final response = await http.patch(
@@ -95,14 +99,68 @@ class _AppClubApprovalAdminPageState extends State<AppClubApprovalAdminPage> {
         body: jsonEncode({"status": status}),
       );
       if (response.statusCode == 200) {
+
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Status updated to $status')),
+          SnackBar(content: Text('Status updated ')),
         );
         fetchRequests();
+         return true;
+      } else {
+        print("Status update failed: ${response.statusCode}");
+        return false;
       }
     } catch (e) {
       print("Update error: $e");
+      return false;
     }
   }
+
+
+  Future<void> fetchUserByEmail(String email) async {
+    final url = Uri.parse("${dotenv.env['API_URL']}/api/user/$email");
+
+    try {
+      final response = await http.get(url);
+      print("User fetch body: ${response.body}");
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        final String userId = data['_id'];
+        await updateUserRole(userId);
+      } else {
+        print("Failed to find president: ${response.statusCode}");
+      }
+    } catch (error) {
+      print("Error fetching user: $error");
+    }
+  }
+
+
+  Future<void> updateUserRole(String userId) async {
+    final String URL = "${dotenv.env['API_URL']}/api/updateprofile";
+    final url = Uri.parse(URL);
+    try {
+      final response = await http.put(
+        url,
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({
+          "_id": userId,
+          "role": "admin",
+        }),
+      );
+      print("Role update response: ${response.body}");
+      if (response.statusCode == 200) {
+        print("User role updated to admin");
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('User role updated')),
+        );
+      } else {
+        print("Failed to update role: ${response.body}");
+      }
+    } catch (e) {
+      print("Role update error: $e");
+    }
+  }
+
 
 }

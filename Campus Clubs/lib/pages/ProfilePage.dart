@@ -54,7 +54,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   width: screenWidth,
                   height: 300,
                   decoration: BoxDecoration(
-                    image: user!.coverPicture != null
+                    image: user != null && user.coverPicture!= "null"
                         ? DecorationImage(
                           image: MemoryImage(base64Decode(user.coverPicture)),
                           fit: BoxFit.cover,
@@ -93,12 +93,12 @@ class _ProfilePageState extends State<ProfilePage> {
                               ? MemoryImage(imageBytes!)
                               : imageFile != null
                               ? FileImage(imageFile!)
-                              : (user.profilePicture != null && user.profilePicture != '')
+                              : (user != null && user.profilePicture!="null")
                               ? MemoryImage(base64Decode(user.profilePicture))
                               : null,
                           child: (imageBytes == null &&
                               imageFile == null &&
-                              (user.profilePicture == null || user.profilePicture == ''))
+                              (user == null && user?.profilePicture=="null"))
                               ? SvgPicture.asset(
                             'assets/svgicons/user.svg',
                             height: 60,
@@ -244,8 +244,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 onPressed: () {
                   if(user!.role=='varsity'){
                     Navigator.of(context).pushNamed(AppRoutes.adminmonitor);
-                  }else{
+                  }else if(user!.role=='admin'){
                     Navigator.of(context).pushNamed(AppRoutes.createClub);
+                  }
+                  else{
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Need To Approval For Creating New Club')),
+                    );
                   }
                 },
                 child: Padding(

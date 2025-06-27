@@ -51,7 +51,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                 onPressed: onProfileClick,
                 padding: EdgeInsets.zero,
                 constraints: BoxConstraints(),
-                icon: user != null && user.profilePicture.isNotEmpty
+                icon: user != null && user.profilePicture!="null"
                     ? ClipOval(
                   child: Image.memory(
                     base64Decode(user.profilePicture),
