@@ -4,6 +4,7 @@ const connectDB = require('./config/db');
 const Routes = require('./routes/user.router');
 const clubRoutes = require('./routes/club.router')
 const approvalRoutes = require('./routes/approval.router')
+const eventRoutes = require('./routes/event.router')
 const cors = require('cors');
 
 const app = express();
@@ -27,6 +28,9 @@ app.use('/api', clubRoutes);
 
 //approval routes
 app.use('/api' ,approvalRoutes );
+
+//event routse
+app.use('/api' ,eventRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 3000;

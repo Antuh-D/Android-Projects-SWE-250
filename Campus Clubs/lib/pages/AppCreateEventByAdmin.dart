@@ -282,11 +282,11 @@ class _CreateEventPageState extends State<AppCreateEventByAdmin> {
       "image": base64Image ?? "",
     };
     //Navigator.pop(context, newEvent);
+    submitToBackend(newEvent);
   }
 
   Future<void> submitToBackend(Map<String, dynamic> eventData) async {
-    final String? baseUrl = dotenv.env['API_URL'];
-    final Uri url = Uri.parse("$baseUrl/api/events"); // Adjust path if needed
+    final url = Uri.parse('${dotenv.env['API_URL']}/api/events');
 
     try {
       final response = await http.post(
@@ -299,16 +299,19 @@ class _CreateEventPageState extends State<AppCreateEventByAdmin> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("Event created successfully!")),
         );
+        Navigator.pop(context);
       } else {
+        // Try to decode error message from backend
+        final errorMsg = jsonDecode(response.body)['error'] ?? 'Unknown error';
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Error: ${response.body}")),
+          SnackBar(content: Text("Error: $errorMsg")),
         );
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Failed to connect to backend.")),
       );
-      print("Error submitting event: $e");
+      print("Error: $e");
     }
   }
 
