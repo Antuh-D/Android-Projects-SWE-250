@@ -1,8 +1,8 @@
 [
   {
-    "title": "Stay Fit, Stay Strong",
-    "description": "Join SUST Fitness Club to achieve your fitness goals with expert guidance and a supportive community.",
-    "imagePath": "assets/png/fitT.png"
+    "title": "Be a Hero, Donate Blood",
+    "description": "Sonchalon is dedicated to saving lives through blood donation drives and awareness campaigns.",
+    "imagePath": "assets/png/bloodT.png"
   },
   {
     "title": "Explore. Analyze. Innovate.",
@@ -10,9 +10,9 @@
     "imagePath": "assets/png/dataT.png"
   },
   {
-    "title": "Be a Hero, Donate Blood",
-    "description": "Sonchalon is dedicated to saving lives through blood donation drives and awareness campaigns.",
-    "imagePath": "assets/png/bloodT.png"
+        "title": "Stay Fit, Stay Strong",
+        "description": "Join SUST Fitness Club to achieve your fitness goals with expert guidance and a supportive community.",
+        "imagePath": "assets/png/fitT.png"
   },
   {
     "title": "Empowering Communities, Changing Lives",

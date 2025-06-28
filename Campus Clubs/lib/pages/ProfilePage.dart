@@ -75,12 +75,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: IconButton(
                     icon: Icon(Icons.camera_alt, color: Colors.black, size: 30),
                     onPressed: () {
-                      // pickImage('profile');
                       pickFile('cover');
                     },
                   ),
                 ),
-                //profile pic
                 Positioned(
                   bottom: -50,
                   left: (screenWidth / 2) - 55,
@@ -118,7 +116,6 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: IconButton(
                           icon: Icon(Icons.camera_alt, size: 20),
                           onPressed: () {
-                           // pickImage('profile');
                             pickFile('profile');
                           },
                         ),
@@ -129,8 +126,6 @@ class _ProfilePageState extends State<ProfilePage> {
               ],
             ),
             SizedBox(height: 60),
-
-            //profile info card
             Center(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 50),
@@ -205,8 +200,6 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
 
             SizedBox(height: 10),
-
-            //join or suggest clubs
             AppContainer(
               child: Padding(
                 padding: EdgeInsets.only(left: 6),
@@ -219,8 +212,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             ),
-
-            //Approval
             AppContainer(
               child: AppTextButton(
                 onPressed: () {
@@ -243,8 +234,6 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
 
-            //crete club
-            //if( user!= null && user.role!='varsity')
             AppContainer(
               child: AppTextButton(
                 onPressed: () {
