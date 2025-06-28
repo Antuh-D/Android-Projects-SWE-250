@@ -1,5 +1,6 @@
 import 'package:campusclubs/pages/AppClubAdminMonitor.dart';
 import 'package:campusclubs/pages/AppClubApprovalAdminPage.dart';
+import 'package:campusclubs/pages/AppCreateEventByAdmin.dart';
 import 'package:flutter/material.dart';
 import 'package:campusclubs/pages/AppClubApprovalPage.dart';
 import 'package:campusclubs/pages/AppClubViewPage.dart';
@@ -34,6 +35,7 @@ class AppRoutes {
     adminmonitor: (context) => AppClubAdminMonitor(),
     upcomingEventsPage: (context) => UpcomingEventsPage(),
     closedEventsPage: (context) => ClosedEventsPage(),
+    eventcreate:(context) => AppCreateEventByAdmin(),
   };
 
   // Route names
@@ -52,5 +54,5 @@ class AppRoutes {
   static const adminmonitor = '/adminmonitor';
   static const upcomingEventsPage = '/upcoming-events';
   static const closedEventsPage = '/closed-events';
-
+  static const eventcreate = '/eventcreate';
 }

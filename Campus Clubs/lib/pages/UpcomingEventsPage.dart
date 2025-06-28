@@ -22,10 +22,13 @@ class _UpcomingEventsPageState extends State<UpcomingEventsPage> {
 
   final Map<String, IconData> categoryIcons = {
     'All': Icons.select_all,
-    'Concert': Icons.music_note,
-    'Coding Competition': Icons.code,
-    'Dance': Icons.music_video,
-    'Fitness': Icons.fitness_center,
+    'Technology': Icons.memory,
+    'Art & Media': Icons.brush,
+    'Culture': Icons.public,
+    'Sports': Icons.sports_soccer,
+    'Theatre': Icons.theaters,
+    'Academics': Icons.school,
+    'Food': Icons.restaurant_menu,
   };
 
   Map<String, int> categoryCounts = {};

@@ -10,4 +10,5 @@ class AppURL{
   static final applications_svg = "assets/svgicons/document_svg.svg";
   static final explore_svg = "assets/svgicons/explore_new.svg";
   static final edit_svg = "assets/svgicons/edit_svg.svg";
+  static final event =  "assets/png/event1.png";
 }

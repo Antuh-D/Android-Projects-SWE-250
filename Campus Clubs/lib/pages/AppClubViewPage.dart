@@ -1,10 +1,13 @@
 import 'dart:convert';
 import 'package:campusclubs/components/MyAppBar.dart';
+import 'package:campusclubs/config/AppRoutes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import '../components/HighlightItem.dart';
 import '../config/ClubModel.dart';
+import '../config/UserProvider.dart';
 import '../styles/AppColors.dart';
 import 'AppEventDetailPage.dart';
 
@@ -165,14 +168,29 @@ class _AppClubViewPageState extends State<AppClubViewPage> {
 
   //upcoming events
   Widget buildEventsSection() {
+    final userProvider = Provider.of<UserProvider>(context);
+    final user = userProvider.user;
+
     return Padding(
       padding: const EdgeInsets.only(right: 16,left: 16,top: 15, bottom: 1),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Upcoming Events",
-              style: GoogleFonts.montserrat(
-                  fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.primaryColor)),
+          Row(
+            children: [
+              Text("Upcoming Events",
+                  style: GoogleFonts.montserrat(
+                      fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.primaryColor)),
+              Spacer(),
+              //if(user?.role=='admin')
+              TextButton(onPressed: (){
+                Navigator.of(context).pushNamed(AppRoutes.eventcreate);
+
+                },
+                  child: Text("Create New",style:GoogleFonts.montserrat(
+                  fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.primaryColor) ,))
+            ],
+          ),
           const SizedBox(height: 10),
           ...List.generate(upcomingEvents.length==0?0:4, (index) {
             return Card(
